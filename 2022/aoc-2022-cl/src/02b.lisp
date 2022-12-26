@@ -1,6 +1,6 @@
-(defpackage day-02a
+(defpackage day-02b
   (:use :cl))
-(in-package :day-02a)
+(in-package :day-02b)
 
 (defun get-game-rules (shape)
   (trivia:match shape

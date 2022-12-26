@@ -7,5 +7,7 @@
                                  :components
                                  ((:file "01")
                                   (:file "02a")
-                                  (:file "02b"))))
+                                  (:file "02b")
+                                  (:file "03a")
+                                  (:file "03b"))))
            :description "")
