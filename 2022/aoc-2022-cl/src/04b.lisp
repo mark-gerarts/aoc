@@ -1,6 +1,6 @@
-(defpackage day-04a
+(defpackage day-04b
   (:use :cl))
-(in-package :day-04a)
+(in-package :day-04b)
 
 (defun range (start end)
   "Creates a list of numbers from start to end, inclusive."
