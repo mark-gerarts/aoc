@@ -19,9 +19,10 @@
 (defun contains-fully (a b)
   (eq (length (intersection a b)) (length b)))
 
-(with-open-file (stream "./input/04.txt")
-  (loop for line = (read-line stream nil)
-        while line
-        for (a b) = (parse-line-to-ranges line)
-          when (or (contains-fully a b) (contains-fully b a))
-          count it))
+(defun solve ()
+  (with-open-file (stream "./input/04.txt")
+    (loop for line = (read-line stream nil)
+          while line
+          for (a b) = (parse-line-to-ranges line)
+            when (or (contains-fully a b) (contains-fully b a))
+            count it)))

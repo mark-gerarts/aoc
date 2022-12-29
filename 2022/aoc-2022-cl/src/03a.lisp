@@ -17,9 +17,10 @@
         (- ascii-value 38)
         (- ascii-value 96))))
 
-(with-open-file (stream "./input/03.txt")
-  (loop for line = (read-line stream nil)
-        while line
-        for (left right) = (parse-line line)
-        for shared-item = (get-shared-item left right)
-          sum (get-priority shared-item)))
+(defun solve ()
+  (with-open-file (stream "./input/03.txt")
+    (loop for line = (read-line stream nil)
+          while line
+          for (left right) = (parse-line line)
+          for shared-item = (get-shared-item left right)
+            sum (get-priority shared-item))))

@@ -58,9 +58,10 @@
    (parse-to-shape (char line 0))
    (parse-to-outcome (char line 2))))
 
-(with-open-file (stream "./input/02.txt")
-  (loop for line = (read-line stream nil)
-        while line
-        for (opp-shape outcome) = (parse-line line)
-        for my-shape = (get-my-shape opp-shape outcome)
-          sum (get-score outcome my-shape)))
+(defun solve ()
+  (with-open-file (stream "./input/02.txt")
+    (loop for line = (read-line stream nil)
+          while line
+          for (opp-shape outcome) = (parse-line line)
+          for my-shape = (get-my-shape opp-shape outcome)
+            sum (get-score outcome my-shape))))

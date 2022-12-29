@@ -16,9 +16,10 @@
 (defun parse-line-to-ranges (line)
   (mapcar #'parse-range (str:split #\, line)))
 
-(with-open-file (stream "./input/04.txt")
-  (loop for line = (read-line stream nil)
-        while line
-        for (a b) = (parse-line-to-ranges line)
-          when (intersection a b)
-          count it))
+(defun solve ()
+  (with-open-file (stream "./input/04.txt")
+    (loop for line = (read-line stream nil)
+          while line
+          for (a b) = (parse-line-to-ranges line)
+            when (intersection a b)
+            count it)))

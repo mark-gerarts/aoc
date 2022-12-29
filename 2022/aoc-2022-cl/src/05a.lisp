@@ -50,10 +50,11 @@
           for top-crate = (elt stack (- (length stack) 1))
             collecting top-crate)))
 
-(multiple-value-bind
-    (stacks instructions)
-    (parse (str:from-file "./input/05.txt"))
-  (loop for instruction in instructions
-        do (apply-instruction stacks instruction)
-        finally (return stacks))
-  (read-top-crates stacks))
+(defun solve ()
+  (multiple-value-bind
+      (stacks instructions)
+      (parse (str:from-file "./input/05.txt"))
+    (loop for instruction in instructions
+          do (apply-instruction stacks instruction)
+          finally (return stacks))
+    (read-top-crates stacks)))

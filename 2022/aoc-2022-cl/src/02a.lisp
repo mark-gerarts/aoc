@@ -26,8 +26,9 @@
 (defun parse-line (line)
   (mapcar #'parse-to-shape (list (char line 0) (char line 2))))
 
-(with-open-file (stream "./input/02.txt")
-  (loop for line = (read-line stream nil)
-        while line
-        for (opp-shape my-shape) = (parse-line line)
-          sum (calculate-points opp-shape my-shape)))
+(defun solve ()
+  (with-open-file (stream "./input/02.txt")
+    (loop for line = (read-line stream nil)
+          while line
+          for (opp-shape my-shape) = (parse-line line)
+            sum (calculate-points opp-shape my-shape))))

@@ -11,9 +11,10 @@
         (- ascii-value 38)
         (- ascii-value 96))))
 
-(let* ((input (str:lines (str:from-file "./input/03.txt")))
-       (input (mapcar (lambda (line) (coerce line 'list)) input))
-       (groups (serapeum:batches input 3)))
-  (loop for group in groups
-        for shared-item = (apply #'get-shared-item group)
-          summing (get-priority shared-item)))
+(defun solve ()
+  (let* ((input (str:lines (str:from-file "./input/03.txt")))
+         (input (mapcar (lambda (line) (coerce line 'list)) input))
+         (groups (serapeum:batches input 3)))
+    (loop for group in groups
+          for shared-item = (apply #'get-shared-item group)
+            summing (get-priority shared-item))))
