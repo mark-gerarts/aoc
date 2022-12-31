@@ -1,17 +1,14 @@
-(defpackage day-04b
-  (:use :cl))
-(in-package :day-04b)
-
-(defun range (start end)
-  "Creates a list of numbers from start to end, inclusive."
-  (loop for n from start to end collect n))
+(defpackage aoc-2022-cl.day-04b
+  (:use :cl :alexandria :serapeum))
+(in-package aoc-2022-cl.day-04b)
 
 (defun parse-range (input)
   "Converts the string '3-8' in a list of numbers from 3 to 8 inclusive."
-  (arrows:->> input
+  (arrows:-<>> input
     (str:split #\-)
     (mapcar #'parse-integer)
-    (apply #'range)))
+    (apply (lambda (start end) (range start (1+ end))))
+    (coerce <> 'list)))
 
 (defun parse-line-to-ranges (line)
   (mapcar #'parse-range (str:split #\, line)))

@@ -1,6 +1,6 @@
-(defpackage day-03a
-  (:use :cl))
-(in-package :day-03a)
+(defpackage aoc-2022-cl.day-03a
+  (:use :cl :alexandria :serapeum))
+(in-package aoc-2022-cl.day-03a)
 
 (defun parse-line (line)
   (let* ((middle (floor (length line) 2)))

@@ -1,6 +1,6 @@
-(defpackage day-06
+(defpackage aoc-2022-cl.day-06
   (:use :cl :alexandria :serapeum))
-(in-package :day-06)
+(in-package aoc-2022-cl.day-06)
 
 (defun first-unique-window (input window-size)
   (loop for i from 0 to (- (length input) window-size)

@@ -1,6 +1,6 @@
-(defpackage day-02b
-  (:use :cl))
-(in-package :day-02b)
+(defpackage aoc-2022-cl.day-02b
+  (:use :cl :alexandria :serapeum))
+(in-package aoc-2022-cl.day-02b)
 
 (defun get-game-rules (shape)
   (trivia:match shape

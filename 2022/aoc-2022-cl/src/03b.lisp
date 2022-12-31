@@ -1,6 +1,6 @@
-(defpackage day-03b
-  (:use :cl))
-(in-package :day-03b)
+(defpackage aoc-2022-cl.day-03b
+  (:use :cl :alexandria :serapeum))
+(in-package aoc-2022-cl.day-03b)
 
 (defun get-shared-item (a b c)
   (car (intersection (intersection a b) c)))

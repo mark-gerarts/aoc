@@ -1,6 +1,6 @@
-(defpackage day-05a
-  (:use :cl))
-(in-package :day-05a)
+(defpackage aoc-2022-cl.day-05a
+  (:use :cl :alexandria :serapeum))
+(in-package aoc-2022-cl.day-05a)
 
 (defun parse (input)
   (let ((input-and-instructions (cl-ppcre:split "\\n\\n" input)))

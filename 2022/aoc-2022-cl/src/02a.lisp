@@ -1,6 +1,6 @@
-(defpackage day-02a
-  (:use :cl))
-(in-package :day-02a)
+(defpackage aoc-2022-cl.day-02a
+  (:use :cl :alexandria :serapeum))
+(in-package aoc-2022-cl.day-02a)
 
 (defun calculate-points (opp-shape my-shape)
   (let ((score-outcome

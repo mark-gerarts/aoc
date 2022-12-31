@@ -1,6 +1,6 @@
-(defpackage day-01
-  (:use :cl))
-(in-package :day-01)
+(defpackage aoc-2022-cl.day-01
+  (:use :cl :alexandria :serapeum))
+(in-package aoc-2022-cl.day-01)
 
 (defun part-a ()
   (let ((input (str:from-file "./input/01.txt")))
