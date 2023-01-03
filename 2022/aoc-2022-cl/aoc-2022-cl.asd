@@ -14,5 +14,6 @@
                                   (:file "04b")
                                   (:file "05a")
                                   (:file "06")
-                                  (:file "07"))))
+                                  (:file "07")
+                                  (:file "08"))))
            :description "")
