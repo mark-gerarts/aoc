@@ -2,21 +2,13 @@
   (:use :cl :alexandria :serapeum))
 (in-package aoc-2022-cl.day-01)
 
-(defun part-a ()
-  (let ((input (str:from-file "./input/01.txt")))
-    (apply #'max (calorie-totals input))))
-
-(defun part-b ()
-  (let* ((input (str:from-file "./input/01.txt"))
-         (totals (calorie-totals input)))
-    (get-sum-top-three totals)))
-
-(defun calorie-totals (input)
+(defun parse-input (input)
   (loop for group in (cl-ppcre:split "\\n\\n" input)
         for split-group = (cl-ppcre:split "\\n" group)
-        collect (reduce #'+ split-group :key #'parse-integer)))
+        collect (reduce #'+ split-group :key #'parse-integer) into totals
+        finally (return (sort totals #'>))))
 
-(defun get-sum-top-three (numbers)
-  (let* ((sorted (sort numbers #'>))
-         (maxima (subseq sorted 0 3)))
-    (apply #'+ maxima)))
+(defun solve ()
+  (let ((calorie-totals (parse-input (uiop:read-file-string "./input/01.txt"))))
+    (format t "Part A: ~A~%" (first calorie-totals))
+    (format t "Part B: ~A~%" (apply #'+ (subseq calorie-totals 0 3)))))
