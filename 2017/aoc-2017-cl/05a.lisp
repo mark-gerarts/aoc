@@ -1,0 +1,12 @@
+(defun jump (instructions current-pos steps)
+  (let* ((instruction (nth current-pos instructions))
+         (next-pos (+ current-pos instruction))
+         (should-jump (and (>= next-pos 0) (< next-pos (length instructions)))))
+    (if (not should-jump)
+        (1+ steps)
+        (progn (setf (nth current-pos instructions) (1+ instruction))
+               (jump instructions next-pos (1+ steps))))))
+
+(defun get-number-of-steps (input)
+  (let ((instructions (mapcar #'parse-integer (str:lines input))))
+    (jump instructions 0 0)))

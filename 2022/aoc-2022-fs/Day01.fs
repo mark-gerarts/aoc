@@ -8,7 +8,7 @@ let calorieTotals =
     |> Seq.map (fun group -> group |> Regex("\n").Split |> Seq.sumBy int)
     |> Seq.sortDescending
 
-let partA = calorieTotals |> Seq.tryHead |> Option.get
+let partA = calorieTotals |> Seq.head
 
 let partB = calorieTotals |> Seq.take 3 |> Seq.sum
 

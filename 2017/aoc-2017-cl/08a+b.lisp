@@ -1,0 +1,63 @@
+(use-package 'cl-ppcre 'alexandria)
+
+(defstruct action var func amount)
+(defstruct instr-cond var expr value)
+
+(defun get-var-value (var-name vars)
+  (let ((hash-val (gethash var-name vars)))
+    (if hash-val hash-val 0)))
+
+(defun perform-action (action vars)
+  (let* ((old-value (get-var-value (action-var action) vars))
+         (new-value (funcall (action-func action)
+                             old-value (action-amount action))))
+    (setf (gethash (action-var action) vars) new-value)
+    vars))
+
+(defun get-condition-result (condition vars)
+  (funcall (instr-cond-expr condition)
+           (get-var-value (instr-cond-var condition) vars)
+           (instr-cond-value condition)))
+
+(defun parse-action (action)
+  (let* ((parts (str:words action))
+         (var (nth 0 parts))
+         (action (nth 1 parts))
+         (func (if (equal action "inc") '+ '-))
+         (amount (parse-integer (nth 2 parts))))
+    (make-action :var var :func func :amount amount)))
+
+(defun parse-condition (condition)
+  (let* ((parts (str:words condition))
+         (var (nth 0 parts))
+         (cond-expr-string (nth 1 parts))
+         (cond-expr (switch (cond-expr-string :test 'equal)
+                      ("!=" '/=)
+                      ("==" '=)
+                      (t (intern cond-expr-string))))
+         (cond-value (parse-integer (nth 2 parts))))
+    (make-instr-cond :var var :expr cond-expr :value cond-value)))
+
+(defun highest-value (hash-table)
+  (loop for key being the hash-keys of hash-table
+          using (hash-value value)
+        maximize value))
+
+(defun eval-line (line vars)
+  (let* ((parts (split " if " line))
+         (action (parse-action (first parts)))
+         (condition (parse-condition (second parts))))
+    (when (get-condition-result condition vars)
+      (perform-action action vars))))
+
+(defun eval-input (input vars)
+  (loop for line in (str:lines input)
+        do (eval-line line vars)
+        maximize (highest-value vars)))
+
+(defun get-highest-register (input)
+  (let* ((vars (make-hash-table :test 'equal))
+         (highest-during-process (eval-input input vars))
+         (highest-at-end (highest-value vars)))
+    (format t "Highest value at the end: ~A~%" highest-at-end)
+    (format t "Highest value during processing:~A" highest-during-process)))
