@@ -11,5 +11,5 @@
 
 (defn solve []
   (let [input (parse-input (slurp "./input/01.txt"))]
-    (println (str "Part A: "  (first input)))
+    (println (str "Part A: " (first input)))
     (println (str "Part B: " (apply + (take 3 input))))))

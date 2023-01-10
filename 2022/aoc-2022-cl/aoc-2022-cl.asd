@@ -11,8 +11,7 @@
            :components ((:module "src"
                                  :components
                                  ((:file "01")
-                                  (:file "02a")
-                                  (:file "02b")
+                                  (:file "02")
                                   (:file "03a")
                                   (:file "03b")
                                   (:file "04a")
@@ -22,5 +21,6 @@
                                   (:file "07")
                                   (:file "08")
                                   (:file "09")
-                                  (:file "10"))))
+                                  (:file "10")
+                                  (:file "11"))))
            :description "")
