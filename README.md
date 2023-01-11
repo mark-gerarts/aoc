@@ -8,9 +8,11 @@ Overview of solved exercises per language:
 - [2022](./2022)
   - [Common Lisp (10)](./2022/aoc-2022-cl/)
   - [Clojure (2)](./2022/aoc-2022-clj/)
-  - [F# (2)](./2022/aoc-2022-fs/)
+  - [F# (5)](./2022/aoc-2022-fs/)
 - [2020](./2020)
   - [Haskell (12)](./2020/aoc-2020-hs/)
+- [2019](./2019)
+  - [Haskell (8)](./2019/aoc-2019-hs)
 - [2017](./2017)
   - [Common Lisp (7)](./2017/aoc-2017-cl/)
 
