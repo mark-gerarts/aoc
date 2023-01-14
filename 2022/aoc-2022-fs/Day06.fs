@@ -10,7 +10,7 @@ let rec solve windowSize input =
     matchAtIndex + windowSize
 
 let run =
-    let input = System.IO.File.ReadAllText("./input/06.txt")
+    let input = System.IO.File.ReadAllText("./input/06.txt") |> Seq.toList
 
     printfn "Part A: %i" <| solve 4 input
     printfn "Part B: %i" <| solve 14 input

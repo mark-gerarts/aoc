@@ -27,8 +27,8 @@ let applyMovesPartA (stacks: array<Stack>) moves =
     for (amount, from, to') in moves do
         for _ in 1..amount do
             let crate = List.head stacks'[from]
-            stacks'.[from] <- List.tail stacks'[from]
-            stacks'.[to'] <- crate :: stacks'[to']
+            stacks'[from] <- List.tail stacks'[from]
+            stacks'[to'] <- crate :: stacks'[to']
 
     stacks'
 
@@ -37,8 +37,8 @@ let applyMovesPartB (stacks: array<Stack>) moves =
 
     for (amount, from, to') in moves do
         let crates = List.take amount stacks'[from]
-        stacks'.[from] <- List.removeManyAt 0 amount stacks'[from]
-        stacks'.[to'] <- List.append crates stacks'[to']
+        stacks'[from] <- List.skip amount stacks'[from]
+        stacks'[to'] <- List.append crates stacks'[to']
 
     stacks'
 
