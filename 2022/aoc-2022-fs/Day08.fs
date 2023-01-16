@@ -18,7 +18,7 @@ let lookAt map direction =
     | Up -> Seq.map Seq.rev (Seq.transpose map)
 
 let parseMap =
-    let input = System.IO.File.ReadAllText("./input/08.sample.txt").Trim()
+    let input = System.IO.File.ReadAllText("./input/08.txt").Trim()
     let lines = input.Split '\n'
     let width = input.Split '\n' |> Array.head |> Seq.length
 
@@ -53,7 +53,41 @@ let countVisible map =
     |> Set.unionMany
     |> Set.count
 
+let findOptimalTreeHouse map =
+    let mutable scores = Map.empty
+
+    let collectScoresFromLine line =
+        for i in { 0 .. Seq.length line - 1 } do
+            let subseq = Seq.skip i line
+            let (currentId, currentHeight) = Seq.head subseq
+            let otherTrees = Seq.tail subseq |> Seq.toList
+
+            let rec calculateViewDistance otherTrees viewDistance =
+                match otherTrees with
+                | [] -> viewDistance
+                | (_, height) :: xs when height < currentHeight -> calculateViewDistance xs (viewDistance + 1)
+                | _ -> viewDistance + 1
+
+            let viewDistance = calculateViewDistance otherTrees 0
+
+            scores <-
+                Map.change
+                    currentId
+                    (fun x ->
+                        match x with
+                        | Some score -> Some <| score * viewDistance
+                        | None -> Some viewDistance)
+                    scores
+
+
+    let collectScoresFromMap map = map |> Seq.iter collectScoresFromLine
+
+    allDirections |> Seq.map (lookAt map) |> Seq.iter collectScoresFromMap
+
+    scores |> Map.toSeq |> Seq.maxBy snd |> snd
+
 let run =
     let map = parseMap
 
     printfn "Part A: %i" <| countVisible map
+    printfn "Part B: %i" <| findOptimalTreeHouse map
