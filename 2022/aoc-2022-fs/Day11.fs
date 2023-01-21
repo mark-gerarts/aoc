@@ -4,9 +4,9 @@ open System.Text.RegularExpressions
 
 type Monkey =
     { id: int
-      items: list<int>
-      operation: int -> int
-      test: int -> bool
+      items: list<bigint>
+      operation: bigint -> bigint
+      divisibleBy: bigint
       ifTrue: int
       ifFalse: int
       inspectCount: int }
@@ -24,7 +24,7 @@ let parseMonkey (monkeyInput: string) =
 
     let startingItems =
         match Regex("\d+").Matches lines[1] with
-        | m when m.Count > 0 -> m |> Seq.map (fun m -> int m.Value) |> Seq.toList
+        | m when m.Count > 0 -> m |> Seq.map (fun m -> bigint (int m.Value)) |> Seq.toList
         | _ -> failwith $"Monkey {id} is not holding any items"
 
     let operation =
@@ -34,13 +34,13 @@ let parseMonkey (monkeyInput: string) =
         match parts[1], parts[2] with
         | "+", "old" -> fun old -> old + old
         | "*", "old" -> fun old -> old * old
-        | "+", number -> fun old -> old + (int number)
-        | "*", number -> fun old -> old * (int number)
+        | "+", number -> fun old -> old + bigint (int number)
+        | "*", number -> fun old -> old * bigint (int number)
         | _ -> failwith $"Unable to parse formula for {id}"
 
-    let test =
+    let divisibleBy =
         match Regex("\d+").Match lines[3] with
-        | m when m.Success -> fun w -> (w % int m.Value) = 0
+        | m when m.Success -> bigint (int m.Value)
         | _ -> failwith $"Unable to parse test for {id}"
 
     let ifTrue =
@@ -56,7 +56,7 @@ let parseMonkey (monkeyInput: string) =
     { id = id
       items = startingItems
       operation = operation
-      test = test
+      divisibleBy = divisibleBy
       ifTrue = ifTrue
       ifFalse = ifFalse
       inspectCount = 0 }
@@ -84,12 +84,13 @@ let rec replaceMonkey monkey monkeys =
 let rec findMonkey monkeys id =
     List.tryFind (fun m -> m.id = id) monkeys
 
-let rec playTurn monkey monkeys =
+let rec playTurn reliefOp monkey monkeys =
     match takeItem monkey with
     | _, None -> monkeys
     | updatedMonkey, Some item ->
-        let updatedItem = item |> monkey.operation |> (fun i -> i / 3)
-        let testResult = monkey.test updatedItem
+        let updatedItem = item |> monkey.operation |> reliefOp
+
+        let testResult = updatedItem % monkey.divisibleBy = bigint 0
         let targetMonkey = if testResult then monkey.ifTrue else monkey.ifFalse
 
         let updatedMonkey' =
@@ -98,14 +99,14 @@ let rec playTurn monkey monkeys =
         let updatedMonkeys =
             throwTo updatedItem targetMonkey monkeys |> replaceMonkey updatedMonkey'
 
-        playTurn updatedMonkey' updatedMonkeys
+        playTurn reliefOp updatedMonkey' updatedMonkeys
 
-let playRound monkeys =
+let playRound reliefOp monkeys =
     let rec go monkeys i =
         match findMonkey monkeys i with
         | None -> monkeys
         | Some monkey ->
-            let updatedMonkeys = playTurn monkey monkeys
+            let updatedMonkeys = playTurn reliefOp monkey monkeys
             go updatedMonkeys (i + 1)
 
     go monkeys 0
@@ -116,20 +117,28 @@ let parseInput =
     |> Seq.map parseMonkey
     |> Seq.toList
 
-let run =
+let playRounds n decreaseWorry =
     let mutable monkeys = parseInput
 
-    for i in { 1..20 } do
-        monkeys <- playRound monkeys
+    let reliefOp =
+        if decreaseWorry then
+            fun (i: bigint) -> i / bigint 3
+        else
+            let commonMult =
+                monkeys |> List.map (fun m -> m.divisibleBy) |> List.reduce (fun a b -> a * b)
 
-        printfn "After round %i:" i
-        monkeys |> List.iter (fun m -> printfn "Monkey %i: %A" m.id m.items)
+            fun (i: bigint) -> i % commonMult
 
-    let result =
-        monkeys
-        |> List.map (fun m -> m.inspectCount)
-        |> List.sortDescending
-        |> List.take 2
-        |> List.reduce (fun a b -> a * b)
+    for _ in { 1..n } do
+        monkeys <- playRound reliefOp monkeys
 
-    printfn "Part A: %A" result
+    monkeys
+    |> List.map (fun m -> m.inspectCount)
+    |> List.sortDescending
+    |> List.take 2
+    |> List.map bigint
+    |> List.reduce (fun a b -> a * b)
+
+let run =
+    printfn "Part A: %A" (playRounds 20 true)
+    printfn "Part B: %A" (playRounds 10000 false)
