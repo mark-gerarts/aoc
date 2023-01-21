@@ -17,6 +17,7 @@ let main args =
         | "9" -> Day09.run
         | "10" -> Day10.run
         | "11" -> Day11.run
+        | "12" -> Day12.run
         | _ -> eprintfn "Day %s does not exist" day
 
     0
