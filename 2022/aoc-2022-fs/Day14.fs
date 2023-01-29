@@ -1,6 +1,5 @@
 module AoC2022.Day14
 
-open System
 open System.Text.RegularExpressions
 
 type Pos = int * int
@@ -14,13 +13,15 @@ type Grid = Map<Pos, Cell>
 
 type SandMovementResult =
     | Fall of Grid
+    | Full of Grid
     | Rest of Grid
 
-let width grid =
-    grid |> Map.keys |> Seq.map fst |> Seq.max
+type Part =
+    | A
+    | B
 
 let height grid =
-    grid |> Map.keys |> Seq.map snd |> Seq.max
+    grid |> Map.filter (fun _ v -> v = Wall) |> Map.keys |> Seq.map snd |> Seq.max
 
 let line (x1, y1) (x2, y2) =
     if x1 = x2 && y1 = y2 then
@@ -57,56 +58,48 @@ let parseInput =
     |> Seq.collect parseLine
     |> Seq.fold (fun m p -> Map.add p Wall m) Map.empty
 
-let rec dropSand (x, y) grid =
+let rec dropSand (x, y) grid part =
     let downLeft = (x - 1, y + 1)
     let down = (x, y + 1)
     let downRight = (x + 1, y + 1)
 
-    let empty p =
-        match Map.tryFind p grid with
-        | Some Air -> true
-        | None -> true
-        | _ -> false
+    let empty (x, y) =
+        match part, Map.tryFind (x, y) grid with
+        | B, _ when y >= height grid + 2 -> false
+        | _, Some Air -> true
+        | _, None -> true
+        | _, _ -> false
 
-    let isOutOfBounds (_, y) = y > height grid
+    let isOutOfBounds (_, y) = part = A && y > height grid
 
     match empty downLeft, empty down, empty downRight with
     | _, true, _ when isOutOfBounds down -> Fall grid
     | true, _, _ when isOutOfBounds downLeft -> Fall grid
     | _, _, true when isOutOfBounds downRight -> Fall grid
-    | _, true, _ -> dropSand down grid
-    | true, _, _ -> dropSand downLeft grid
-    | _, _, true -> dropSand downRight grid
+    | _, true, _ -> dropSand down grid part
+    | true, _, _ -> dropSand downLeft grid part
+    | _, _, true -> dropSand downRight grid part
+    | false, false, false when (x, y) = (500, 0) -> Full <| Map.add (x, y) Sand grid
     | false, false, false -> Rest <| Map.add (x, y) Sand grid
 
-let rec dropSandUntilFull grid =
-    match dropSand (500, 0) grid with
+let rec dropSandUntilFullOrFall part grid =
+    match dropSand (500, 0) grid part with
     | Fall _ -> grid
-    | Rest g -> dropSandUntilFull g
+    | Full _ -> grid
+    | Rest g -> dropSandUntilFullOrFall part g
 
 let countSand grid =
     Map.values grid |> Seq.filter (fun x -> x = Sand) |> Seq.length
 
-let printGrid grid =
-    let getCharForPos p =
-        match Map.tryFind p grid with
-        | Some Wall -> '#'
-        | Some Sand -> 'o'
-        | Some Air -> '.'
-        | None -> '.'
+let partA grid =
+    grid |> dropSandUntilFullOrFall A |> countSand
 
-    let w = width grid
-    let h = height grid
-
-    for y in { 0..h } do
-        let line = { 450..w } |> Seq.map (fun x -> getCharForPos (x, y)) |> String.Concat
-        printfn "%s" line
-
+// This takes a *long* time to run...
+let partB grid =
+    1 + (grid |> dropSandUntilFullOrFall B |> countSand)
 
 let run =
     let grid = parseInput
-    let fullGrid = dropSandUntilFull grid
 
-    printGrid fullGrid
-
-    printfn "Part A: %i" <| countSand fullGrid
+    printfn "Part A: %i" <| partA grid
+    printfn "Part B: %i" <| partB grid
