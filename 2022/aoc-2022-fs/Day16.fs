@@ -14,39 +14,23 @@ type Action =
     | MoveTo of string * int
 
 let parseInput =
-    let mutable rooms = Map.empty
+    let parseLine line =
+        let roomNames =
+            Regex("[A-Z]{2}").Matches line |> Seq.map (fun m -> m.Value) |> Seq.toList
 
-    for line in System.IO.File.ReadAllLines("./input/16.sample.txt") do
-        let matches = Regex("[A-Z]{2}").Matches line
-
-        let name = matches[0].Value
-
-        let adjacentRooms =
-            { 1 .. matches.Count - 1 } |> Seq.map (fun i -> matches[i].Value) |> Seq.toList
+        let name = List.head roomNames
+        let adjacentRooms = List.tail roomNames
 
         let flowRateMatches = Regex("\d+").Matches line
         let flowRate = int flowRateMatches[0].Value
 
-        let room =
-            { name = name
-              flowRate = flowRate
-              adjacentRooms = adjacentRooms }
+        { name = name
+          flowRate = flowRate
+          adjacentRooms = adjacentRooms }
 
-        rooms <- Map.add name room rooms
-
-    rooms
-
-let possibleSteps room openRooms prunedSearchSpace minutesRemaining =
-    let moves =
-        Map.find room.name prunedSearchSpace
-        |> List.filter (fun (name, _) -> not <| Set.contains name openRooms)
-        |> List.filter (fun (_, time) -> time < minutesRemaining)
-        |> List.map (fun (name, time) -> MoveTo(name, time))
-
-    if Set.contains room.name openRooms || room.name = "AA" then
-        moves
-    else
-        OpenValve :: moves
+    System.IO.File.ReadAllLines("./input/16.sample.txt")
+    |> Seq.map parseLine
+    |> Seq.fold (fun rooms room -> Map.add room.name room rooms) Map.empty
 
 let bfs rooms start target =
     let mutable parents = Map.empty
@@ -76,7 +60,8 @@ let bfs rooms start target =
 
     go (List.singleton start) (Set.singleton start)
 
-// Reduce the search space to only rooms with a flow rate.
+// Reduce the search space to only rooms with a flow rate, and construct a map
+// with shortest distances to other rooms.
 let pruneSearchSpace rooms =
     let roomsWithFlowRate =
         rooms
@@ -86,33 +71,43 @@ let pruneSearchSpace rooms =
         |> Seq.toList
 
     let interestingRooms = "AA" :: roomsWithFlowRate
-    let mutable prunedSearchSpace = Map.empty
 
-    for roomName in interestingRooms do
-        let connections =
-            interestingRooms
-            |> List.filter (fun otherName -> otherName <> roomName && otherName <> "AA")
-            |> List.map (fun otherName -> otherName, bfs rooms roomName otherName |> List.length)
+    let getConnectionsForRoom roomName =
+        interestingRooms
+        |> List.filter (fun otherName -> otherName <> roomName && otherName <> "AA")
+        |> List.map (fun otherName -> otherName, bfs rooms roomName otherName |> List.length)
 
-        prunedSearchSpace <- Map.add roomName connections prunedSearchSpace
+    interestingRooms
+    |> List.map (fun name -> (name, getConnectionsForRoom name))
+    |> List.fold (fun m (name, cxs) -> Map.add name cxs m) Map.empty
 
-    prunedSearchSpace
+let possibleSteps room openRooms prunedSearchSpace minutesRemaining =
+    let moves =
+        Map.find room.name prunedSearchSpace
+        |> List.filter (fun (name, _) -> not <| Set.contains name openRooms)
+        |> List.filter (fun (_, time) -> time < minutesRemaining)
+        |> List.map (fun (name, time) -> MoveTo(name, time))
 
-let partA =
+    if Set.contains room.name openRooms || room.name = "AA" then
+        moves
+    else
+        OpenValve :: moves
+
+let solve =
     let roomMap = parseInput
     let prunedMap = pruneSearchSpace roomMap
     let start = Map.find "AA" roomMap
 
     let mutable cache = Map.empty
 
-    let rec search room openRooms minutesRemaining =
-        let memoizeSearch room openRooms minutesRemaining =
-            let stateAsKey = (room, openRooms, minutesRemaining)
+    let rec search room openRooms minutesRemaining ele =
+        let memoizeSearch room openRooms minutesRemaining ele =
+            let stateAsKey = (room, openRooms, minutesRemaining, ele)
 
             match Map.tryFind stateAsKey cache with
             | Some result -> result
             | None ->
-                let result = search room openRooms minutesRemaining
+                let result = search room openRooms minutesRemaining ele
                 cache <- Map.add stateAsKey result cache
                 result
 
@@ -123,10 +118,10 @@ let partA =
                 let addedPressure = newMinutesRemaining * room.flowRate
                 let newOpenRooms = Set.add room.name openRooms
 
-                addedPressure + memoizeSearch room newOpenRooms newMinutesRemaining
+                addedPressure + memoizeSearch room newOpenRooms newMinutesRemaining ele
             | MoveTo(name, time) ->
                 let newRoom = Map.find name roomMap
-                memoizeSearch newRoom openRooms (minutesRemaining - time)
+                memoizeSearch newRoom openRooms (minutesRemaining - time) ele
 
         if minutesRemaining <= 0 then
             0
@@ -134,10 +129,19 @@ let partA =
             let results =
                 possibleSteps room openRooms prunedMap minutesRemaining |> List.map handleOption
 
+            let eleMax = if ele then memoizeSearch start openRooms 26 false else 0
+
             match results with
-            | [] -> 0
-            | xs -> List.max xs
+            | [] -> max 0 eleMax
+            | xs -> max (List.max xs) eleMax
 
-    search start Set.empty 30
+    let partA = search start Set.empty 30 false
+    let partB = search start Set.empty 26 true
 
-let run = printfn "%A" <| partA
+    (partA, partB)
+
+// Beware, part B runs prettyyy slow on the real input.
+let run =
+    let (partA, partB) = solve
+    printfn "Part A: %i" partA
+    printfn "Part B: %i" partB
