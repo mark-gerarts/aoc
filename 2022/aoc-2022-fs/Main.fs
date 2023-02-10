@@ -22,6 +22,8 @@ let main args =
         | "14" -> Day14.run
         | "15" -> Day15.run
         | "16" -> Day16.run
+        | "17" -> Day17.run
+        | "18" -> Day18.run
         | _ -> eprintfn "Day %s does not exist" day
 
     0
