@@ -10,9 +10,9 @@ let parseStacks (setup: string) =
 
     for line in lines do
         for i in [ 1 .. line.Length - 1 ] do
-            if Regex("[A-Z]").IsMatch(line[ i ].ToString()) then
+            if Regex("[A-Z]").IsMatch(line[i].ToString()) then
                 let stackNumber = (i - 1) / 4
-                stacks.[stackNumber] <- line[i] :: stacks.[stackNumber]
+                stacks[stackNumber] <- line[i] :: stacks.[stackNumber]
 
     stacks |> Seq.map List.rev |> Seq.toArray
 
@@ -43,13 +43,13 @@ let applyMovesPartB (stacks: array<Stack>) moves =
     stacks'
 
 let readTopCrates (stacks: array<Stack>) =
-    stacks |> Seq.map List.head |> Seq.map string |> String.concat ""
+    stacks |> Seq.map (List.head >> string) |> String.concat ""
 
 let run =
     let input = System.IO.File.ReadAllText("./input/05.txt").TrimEnd()
     let parts = Regex("\n\n").Split(input)
     let stacks = parts[0] |> parseStacks
-    let moves = parts[ 1 ].Split('\n') |> Seq.map parseMove
+    let moves = parts[1].Split('\n') |> Seq.map parseMove
 
     printfn "Part A: %s" <| (applyMovesPartA stacks moves |> readTopCrates)
     printfn "Part B: %s" <| (applyMovesPartB stacks moves |> readTopCrates)
