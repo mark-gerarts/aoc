@@ -79,13 +79,13 @@ languages.
 
 ## [2015](./2015)
 
-|[F#](./2015/aoc-2015-fs/) |
-| ------------------------ |
-| [Day01.fs](./2015/aoc-2015-fs/Day01.fs) |
-| [Day02.fs](./2015/aoc-2015-fs/Day02.fs) |
-| [Day03.fs](./2015/aoc-2015-fs/Day03.fs) |
-| [Day04.fs](./2015/aoc-2015-fs/Day04.fs) |
-| [Day05.fs](./2015/aoc-2015-fs/Day05.fs) |
+|[F#](./2015/aoc-2015-fs/) | [Nim](./2015/aoc-2015-nim) |
+| ------------------------ | -------------------------- |
+| [Day01.fs](./2015/aoc-2015-fs/Day01.fs) | [day01.nim](./2015/aoc-2015-nim/day01.nim) |
+| [Day02.fs](./2015/aoc-2015-fs/Day02.fs) | [day02.nim](./2015/aoc-2015-nim/day02.nim) |
+| [Day03.fs](./2015/aoc-2015-fs/Day03.fs) | |
+| [Day04.fs](./2015/aoc-2015-fs/Day04.fs) | |
+| [Day05.fs](./2015/aoc-2015-fs/Day05.fs) | |
 
 ```text
                                  |

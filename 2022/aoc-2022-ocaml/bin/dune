@@ -1,0 +1,6 @@
+(executable
+ (public_name aoc2022)
+ (preprocess
+  (pps ppx_deriving.show ppx_deriving.ord))
+ (name main)
+ (libraries aoc2022))
