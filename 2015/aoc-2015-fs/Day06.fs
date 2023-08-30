@@ -7,15 +7,22 @@ type Action =
     | TurnOff
     | Toggle
 
-type Point = int * int
+// Using native Sets/Maps is super slow, so we resort to a mutable array
+// wrapped in a class instead.
+type Grid(actionHandler: Action -> int -> int) =
+    let mutable grid = Array.zeroCreate (1000 * 1000)
 
-type Area = Point * Point
+    member private self.updateValueAt (x, y) fn =
+        let index = 1000 * y + x
+        grid[index] <- fn grid[index]
 
-type Instruction = Action * Area
+    member self.handleAction action p =
+        self.updateValueAt p (actionHandler action)
 
-type Grid = Set<Point>
+    member self.getBrightness() = Array.sum grid
 
-let parseLine (line: string) : Instruction =
+// Some overkill FParsec parsing
+let parseLine (line: string) =
     let toTuple a b = (a, b)
     let pCoord = pipe2 pint32 (pchar ',' >>. pint32) toTuple
     let pArea = pipe2 pCoord (pstring " through " >>. pCoord) toTuple
@@ -29,13 +36,6 @@ let parseLine (line: string) : Instruction =
     | Success(instruction, _, _) -> instruction
     | _ -> failwithf "Failed to parse line '%s'" line
 
-let applyAction action grid point =
-    match action with
-    | TurnOn -> Set.add point grid
-    | TurnOff -> Set.remove point grid
-    | Toggle when Set.contains point grid -> Set.remove point grid
-    | Toggle -> Set.add point grid
-
 let getPointsForArea ((x1, y1), (x2, y2)) =
     seq {
         for x in x1..x2 do
@@ -43,15 +43,31 @@ let getPointsForArea ((x1, y1), (x2, y2)) =
                 yield (x, y)
     }
 
-let applyInstruction grid instruction =
+let applyInstruction (grid: Grid) instruction =
     let (action, area) = instruction
 
-    area |> getPointsForArea |> Seq.fold (applyAction action) grid
+    area |> getPointsForArea |> Seq.iter (grid.handleAction action)
 
 let run filename =
-    filename
-    |> System.IO.File.ReadLines
-    |> Seq.map parseLine
-    |> Seq.fold applyInstruction Set.empty
-    |> Set.count
-    |> printfn "Part 1: %i"
+    let partAHandler action oldValue =
+        match action with
+        | TurnOn -> 1
+        | TurnOff -> 0
+        | Toggle -> if oldValue = 1 then 0 else 1
+
+    let gridA = new Grid(partAHandler)
+
+    let partBHandler action oldValue =
+        match action with
+        | TurnOn -> oldValue + 1
+        | TurnOff -> if oldValue = 0 then 0 else oldValue - 1
+        | Toggle -> oldValue + 2
+
+    let gridB = new Grid(partBHandler)
+
+    let instructions = filename |> System.IO.File.ReadLines |> Seq.map parseLine
+    instructions |> Seq.iter (applyInstruction gridA)
+    instructions |> Seq.iter (applyInstruction gridB)
+
+    printfn "Part 1: %i" <| gridA.getBrightness ()
+    printfn "Part 2: %i" <| gridB.getBrightness ()
