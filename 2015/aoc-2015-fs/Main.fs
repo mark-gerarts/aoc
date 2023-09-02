@@ -27,6 +27,8 @@ let main args =
             | "10" -> Day10.run
             | "11" -> Day11.run
             | "12" -> Day12.run
+            | "13" -> Day13.run
+            | "14" -> Day14.run
             | _ -> failwithf "Day %s does not exist" day
 
         dayFn inputFilename

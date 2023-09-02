@@ -5,7 +5,7 @@ languages.
 
 ## [2022](./2022)
 
-| [f#](./2022/aoc-2022-fs/) | [Nim](./2022/aoc-2022-nim/) | [Common Lisp](./2022/aoc-2022-cl/) |
+| [F#](./2022/aoc-2022-fs/) | [Nim](./2022/aoc-2022-nim/) | [Common Lisp](./2022/aoc-2022-cl/) |
 | ------------------------ | ------------------------ | ------------------------ |
 | [Day01.fs](./2022/aoc-2022-fs/Day01.fs) | [day01.nim](./2022/aoc-2022-nim/day01.nim) | [01.lisp](./2022/aoc-2022-cl/src/01.lisp) |
 | [Day02.fs](./2022/aoc-2022-fs/Day02.fs) | [day02.nim](./2022/aoc-2022-nim/day02.nim) | [02.lisp](./2022/aoc-2022-cl/src/02.lisp) |
@@ -86,6 +86,13 @@ languages.
 | [Day03.fs](./2015/aoc-2015-fs/Day03.fs) | |
 | [Day04.fs](./2015/aoc-2015-fs/Day04.fs) | |
 | [Day05.fs](./2015/aoc-2015-fs/Day05.fs) | |
+| [Day06.fs](./2015/aoc-2015-fs/Day06.fs) | |
+| [Day07.fs](./2015/aoc-2015-fs/Day07.fs) | |
+| [Day08.fs](./2015/aoc-2015-fs/Day08.fs) | |
+| [Day09.fs](./2015/aoc-2015-fs/Day09.fs) | |
+| [Day10.fs](./2015/aoc-2015-fs/Day10.fs) | |
+| [Day11.fs](./2015/aoc-2015-fs/Day11.fs) | |
+| [Day12.fs](./2015/aoc-2015-fs/Day12.fs) | |
 
 ```text
                                  |
