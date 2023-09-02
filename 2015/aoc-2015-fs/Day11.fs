@@ -5,7 +5,7 @@ let increment password =
         match xs with
         | [] -> failwith "Overflow"
         | x :: xs when x < 25 -> (x + 1) :: xs
-        | _ :: xs -> 1 :: go xs
+        | _ :: xs -> 0 :: go xs
 
     List.rev password |> go |> List.rev
 
@@ -19,19 +19,19 @@ let isValid password =
         password |> List.windowed 3 |> List.exists isIncreasing
 
     let containsForbidden password =
-        let forbidden = [ int 'i' - int 'a'; int 'l' - int 'a'; int 'o' - int 'a' ]
-
-        forbidden |> List.exists (fun i -> List.contains i password)
+        [ 'i'; 'l'; 'o' ]
+        |> List.map (fun c -> int c - int 'a')
+        |> List.exists (fun i -> List.contains i password)
 
     let containsPairs password =
-        let rec go password numPairs =
-            match numPairs, password with
-            | 2, _ -> true
-            | _, x :: y :: xs when x = y -> go xs (numPairs + 1)
-            | _, _ :: xs -> go xs numPairs
-            | _ -> false
+        let rec go password pair1 =
+            match password, pair1 with
+            | x :: y :: xs, None when x = y -> go xs (Some x)
+            | x :: y :: _, Some a when x = y && x <> a -> true
+            | _ :: xs, pair1 -> go xs pair1
+            | [], _ -> false
 
-        go password 0
+        go password None
 
     let conditions = [| containsIncreasing; not << containsForbidden; containsPairs |]
 
@@ -54,9 +54,7 @@ let rec solve sequence =
 
 let run filename =
     let sequence = filename |> System.IO.File.ReadLines |> Seq.head |> toDigits
-
     let newSequence = solve sequence
 
-    // Todo: part 2 is wrong
     newSequence |> toString |> printfn "Part 1: %s"
     newSequence |> increment |> solve |> toString |> printfn "Part 2: %s"

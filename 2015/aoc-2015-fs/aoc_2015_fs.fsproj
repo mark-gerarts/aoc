@@ -17,11 +17,13 @@
     <Compile Include="Day09.fs" />
     <Compile Include="Day10.fs" />
     <Compile Include="Day11.fs" />
+    <Compile Include="Day12.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="fparsec" Version="1.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>
