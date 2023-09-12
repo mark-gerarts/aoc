@@ -1,5 +1,7 @@
 module AoC2015.Day19
 
+type Replacements = (string * string) list
+
 let parseInput filename =
     let input = System.IO.File.ReadAllText filename
     let parts = input.Trim().Split("\n\n")
@@ -12,7 +14,7 @@ let parseInput filename =
 
     (replacements.Split('\n') |> Seq.map parseReplacementLine |> Seq.toList, inputString)
 
-let generateMolecules (replacements: (string * string) list) (input: string) =
+let generateMolecules (replacements: Replacements) (input: string) =
     let rec go (replacements: (string * string) list) (currentIndex: int) =
         match replacements with
         | [] -> []
@@ -25,23 +27,21 @@ let generateMolecules (replacements: (string * string) list) (input: string) =
 
     go replacements 0 |> List.distinct
 
-let rec findShortestPath replacements inputs target numSteps =
-    let allNewMolecules =
-        inputs
-        |> List.collect (generateMolecules replacements)
-        // Replacements only make the string larger, so we can cull things.
-        |> List.filter (fun m -> String.length m < String.length target)
+let reverseMolecule (replacements: Replacements) (molecule: string) =
+    let rec go (molecule: string) (currentReplacements: Replacements) (steps: int) =
+        match currentReplacements with
+        | [] -> steps
+        | (l, r) :: xs ->
+            match molecule.IndexOf(r) with
+            | -1 -> go molecule xs steps
+            | index ->
+                let newMolecule = molecule.Remove(index, String.length r).Insert(index, l)
+                go newMolecule replacements (steps + 1)
 
-    printfn "%A" (List.length allNewMolecules)
-
-
-    if List.contains target allNewMolecules then
-        numSteps + 1
-    else
-        findShortestPath replacements allNewMolecules target (numSteps + 1)
+    go molecule replacements 0
 
 let run filename =
     let (replacements, input) = parseInput filename
-    generateMolecules replacements input |> List.length |> printfn "Part 1: %i"
 
-    findShortestPath replacements [ "e" ] input 0 |> printfn "Part 2: %i"
+    generateMolecules replacements input |> List.length |> printfn "Part 1: %i"
+    reverseMolecule replacements input |> printfn "Part 2: %i"
