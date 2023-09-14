@@ -93,6 +93,15 @@ languages.
 | [Day10.fs](./2015/aoc-2015-fs/Day10.fs) | |
 | [Day11.fs](./2015/aoc-2015-fs/Day11.fs) | |
 | [Day12.fs](./2015/aoc-2015-fs/Day12.fs) | |
+| [Day13.fs](./2015/aoc-2015-fs/Day13.fs) | |
+| [Day14.fs](./2015/aoc-2015-fs/Day14.fs) | |
+| [Day15.fs](./2015/aoc-2015-fs/Day15.fs) | |
+| [Day16.fs](./2015/aoc-2015-fs/Day16.fs) | |
+| [Day17.fs](./2015/aoc-2015-fs/Day17.fs) | |
+| [Day18.fs](./2015/aoc-2015-fs/Day18.fs) | |
+| [Day19.fs](./2015/aoc-2015-fs/Day19.fs) | |
+| [Day20.fs](./2015/aoc-2015-fs/Day20.fs) | |
+| [Day21.fs](./2015/aoc-2015-fs/Day21.fs) | |
 
 ```text
                                  |
