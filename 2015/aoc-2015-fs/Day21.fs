@@ -68,7 +68,7 @@ let rec combinations n l =
     | k, (x :: xs) -> List.map ((@) [ x ]) (combinations (k - 1) xs) @ combinations k xs
 
 let getItemCombinations (weapons, armor, rings) =
-    let weapons = combinations 1 weapons @ combinations 0 weapons
+    let weapons = combinations 1 weapons
     let armor = combinations 1 armor @ combinations 0 armor
     let rings = combinations 2 rings @ combinations 1 rings @ combinations 0 rings
 
@@ -94,8 +94,7 @@ let fight char1 char2 =
     else
         Lose
 
-
-let run filename =
+let run _ =
     getItemCombinations shop
     |> Seq.map (Seq.fold equip player)
     |> Seq.filter (fun c -> fight c boss = Win)
@@ -103,10 +102,9 @@ let run filename =
     |> Seq.min
     |> printfn "Part 1: %d"
 
-    // TODO: this is wrong.
     getItemCombinations shop
     |> Seq.map (Seq.fold equip player)
     |> Seq.filter (fun c -> fight c boss = Lose)
     |> Seq.map (fun c -> c.cost)
     |> Seq.max
-    |> printfn "%A"
+    |> printfn "Part 2: %d"
