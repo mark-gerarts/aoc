@@ -77,6 +77,12 @@ languages.
 | [12a+b.lisp](./2017/aoc-2017-cl/12a+b.lisp) |
 | [20a.lisp](./2017/aoc-2017-cl/20a.lisp) |
 
+## [2016](./2016)
+
+|[F#](./2016/aoc-2016-fs/) |
+| ------------------------ |
+| [Day01.fs](./2016/aoc-2016-fs/Day01.fs) |
+
 ## [2015](./2015)
 
 |[F#](./2015/aoc-2015-fs/) | [Nim](./2015/aoc-2015-nim) |
@@ -102,6 +108,10 @@ languages.
 | [Day19.fs](./2015/aoc-2015-fs/Day19.fs) | |
 | [Day20.fs](./2015/aoc-2015-fs/Day20.fs) | |
 | [Day21.fs](./2015/aoc-2015-fs/Day21.fs) | |
+| [Day22.fs](./2015/aoc-2015-fs/Day22.fs) | |
+| [Day23.fs](./2015/aoc-2015-fs/Day23.fs) | |
+| [Day24.fs](./2015/aoc-2015-fs/Day24.fs) | |
+| [Day25.fs](./2015/aoc-2015-fs/Day25.fs) | |
 
 ```text
                                  |

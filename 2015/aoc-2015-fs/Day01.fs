@@ -1,19 +1,18 @@
 module AoC2015.Day01
 
-let slurp c =
+let parse c =
     match c with
     | '(' -> 1
     | ')' -> -1
     | _ -> failwithf "Unexpected character %c" c
 
-let parse file =
-    System.IO.File.ReadAllText(file).Trim() |> Seq.map slurp
+let run filename =
+    let input = System.IO.File.ReadAllText(filename).Trim() |> Seq.map parse
 
-let part1 file = file |> parse |> Seq.sum
+    input |> Seq.sum |> printfn "Part 1: %i"
 
-let part2 file =
-    file |> parse |> Seq.scan (+) 0 |> Seq.takeWhile ((<=) 0) |> Seq.length
-
-let run file =
-    printfn "Part 1: %i" <| part1 file
-    printfn "Part 2: %A" <| part2 file
+    input
+    |> Seq.scan (+) 0
+    |> Seq.takeWhile ((<=) 0)
+    |> Seq.length
+    |> printfn "Part 2: %i"
