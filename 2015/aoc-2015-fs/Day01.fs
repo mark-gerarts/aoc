@@ -11,8 +11,4 @@ let run filename =
 
     input |> Seq.sum |> printfn "Part 1: %i"
 
-    input
-    |> Seq.scan (+) 0
-    |> Seq.takeWhile ((<=) 0)
-    |> Seq.length
-    |> printfn "Part 2: %i"
+    input |> Seq.scan (+) 0 |> Seq.findIndex ((=) -1) |> printfn "Part 2: %i"
