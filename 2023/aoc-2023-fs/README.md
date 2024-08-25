@@ -3,12 +3,7 @@
 Usage:
 
 ```bash
-$ dotnet run XX path/to/inputDayXX.txt
+dotnet fsi Day01.fsx
 ```
 
-Development:
-
-```bash
-$ dotnet watch run XX path/to/inputDayXX.txt
-```
-
+Inputs are expected to be in the `input` folder, e.g. `input/01.txt`.
