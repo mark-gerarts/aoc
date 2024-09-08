@@ -3,13 +3,13 @@
 open FsUnit
 
 type HandType =
-    | FiveOfAKind
-    | FourOfAKind
-    | FullHouse
-    | ThreeOfAKind
-    | TwoPair
-    | OnePair
     | HighCard
+    | OnePair
+    | TwoPair
+    | ThreeOfAKind
+    | FullHouse
+    | FourOfAKind
+    | FiveOfAKind
 
 let handType hand =
     let cards = Seq.toList hand
@@ -65,13 +65,13 @@ let parseLine (line: string) =
     | [| hand; bid |] -> hand, int bid
     | _ -> failwithf "Failed to parse line %s" line
 
-let input = System.IO.File.ReadLines "input/07.test" |> Seq.map parseLine
+let input = System.IO.File.ReadLines "input/07.txt" |> Seq.map parseLine
 
 input
 |> Seq.sortWith (fun a b -> compareHands (fst a) (fst b))
-|> Seq.rev
-|> Seq.toList
-|> printfn "%A"
+|> Seq.mapi (fun i (_, bid) -> (i + 1) * bid)
+|> Seq.sum
+|> printfn "Part 1: %i"
 
 handType "QQQQQ" |> should equal FiveOfAKind
 handType "QQQQ1" |> should equal FourOfAKind
