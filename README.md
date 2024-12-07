@@ -11,6 +11,20 @@ languages.
 | [Day02.sql](./2024/aoc-2024-duckdb/Day02.sql) |
 | [Day03.sql](./2024/aoc-2024-duckdb/Day03.sql) |
 
+## [2023](./2023)
+
+| [F#](./2023/aoc-2023-fs/) |
+| --- |
+| [Day01.fsx](./2023/aoc-2023-fs/Day01.fsx) |
+| [Day02.fsx](./2023/aoc-2023-fs/Day02.fsx) |
+| [Day03.fsx](./2023/aoc-2023-fs/Day03.fsx) |
+| [Day04.fsx](./2023/aoc-2023-fs/Day04.fsx) |
+| [Day05.fsx](./2023/aoc-2023-fs/Day05.fsx) |
+| [Day06.fsx](./2023/aoc-2023-fs/Day06.fsx) |
+| [Day07.fsx](./2023/aoc-2023-fs/Day07.fsx) |
+| [Day08.fsx](./2023/aoc-2023-fs/Day08.fsx) |
+| [Day09.fsx](./2023/aoc-2023-fs/Day09.fsx) |
+
 ## [2022](./2022)
 
 | [F#](./2022/aoc-2022-fs/) | [Nim](./2022/aoc-2022-nim/) | [Common Lisp](./2022/aoc-2022-cl/) |
