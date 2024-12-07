@@ -3,6 +3,13 @@
 I use Advent of Code mostly as a playground to experiment with new programming
 languages.
 
+## [2024](./2024)
+
+| [DuckDB](./2024/aoc-2024-duckdb/) |
+| [Day01.sql](./2024/aoc-2024-duckdb/Day01.sql) |
+| [Day02.sql](./2024/aoc-2024-duckdb/Day02.sql) |
+| [Day03.sql](./2024/aoc-2024-duckdb/Day03.sql) |
+
 ## [2022](./2022)
 
 | [F#](./2022/aoc-2022-fs/) | [Nim](./2022/aoc-2022-nim/) | [Common Lisp](./2022/aoc-2022-cl/) |
