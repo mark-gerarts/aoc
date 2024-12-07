@@ -6,6 +6,7 @@ languages.
 ## [2024](./2024)
 
 | [DuckDB](./2024/aoc-2024-duckdb/) |
+| --- |
 | [Day01.sql](./2024/aoc-2024-duckdb/Day01.sql) |
 | [Day02.sql](./2024/aoc-2024-duckdb/Day02.sql) |
 | [Day03.sql](./2024/aoc-2024-duckdb/Day03.sql) |
