@@ -1,6 +1,6 @@
-let parseInput input =
+let parseInput filename =
     let pairs =
-        input
+        filename
         |> System.IO.File.ReadAllLines
         |> Seq.map _.Split("   ")
 
