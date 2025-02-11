@@ -8,3 +8,5 @@ name = "Aoc"
 [[lean_exe]]
 name = "aoc"
 root = "Main"
+
+# [[require]]
