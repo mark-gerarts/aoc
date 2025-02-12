@@ -1,4 +1,4 @@
-def toLevels (input: String) :=
+def toLevels (input: String): List Int :=
   let parse
     | '(' => 1
     | ')' => -1
@@ -12,11 +12,11 @@ def scanl (f: β → α → β) (x: β)
   | y :: ys => x :: scanl f (f x y) ys
 
 
-def part1 (input: String) :=
+def part1 (input: String): Int :=
   input |> toLevels |>.sum
 
 
-def part2 (input: String) :=
+def part2 (input: String): Int :=
   input
   |> toLevels
   |> scanl (· + ·)  0
