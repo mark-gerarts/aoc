@@ -1,6 +1,6 @@
-WITH input AS (
+WITH RECURSIVE input AS (
     SELECT ROW_NUMBER() OVER() as row_number, line
-    FROM read_csv('input/05.txt', columns={'line': 'VARCHAR'})
+    FROM read_csv('input/05.test', columns={'line': 'VARCHAR'})
 ),
 orderings AS (
     SELECT
