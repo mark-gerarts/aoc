@@ -1,7 +1,7 @@
 let parse filename =
     filename
     |> System.IO.File.ReadAllLines
-    |> Seq.map (fun l -> l.Split(' ') |> Seq.map int)
+    |> Seq.map (_.Split(' ') >> Seq.map int)
 
 let isSafe line =
     let pairs = Seq.zip line (Seq.tail line)

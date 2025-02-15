@@ -9,4 +9,6 @@ name = "Aoc"
 name = "aoc"
 root = "Main"
 
-# [[require]]
+[[require]]
+name = "Regex"
+scope = "bergmannjg"
