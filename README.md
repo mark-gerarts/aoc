@@ -9,7 +9,7 @@ languages.
 | --- | --- | --- |
 |  [Day01.fsx](./2024/aoc-2024-fs/Day01.fsx) |  [Day01.lean](./2024/aoc-2024-lean/Aoc/Day01.lean) |  [Day01.sql](./2024/aoc-2024-duckdb/Day01.sql) |
 |  [Day02.fsx](./2024/aoc-2024-fs/Day02.fsx) |  [Day02.lean](./2024/aoc-2024-lean/Aoc/Day02.lean) |  [Day02.sql](./2024/aoc-2024-duckdb/Day02.sql) |
-|  |  [Day03.lean](./2024/aoc-2024-lean/Aoc/Day03.lean) |  [Day03.sql](./2024/aoc-2024-duckdb/Day03.sql) |
+|  [Day03.fsx](./2024/aoc-2024-fs/Day03.fsx) |  [Day03.lean](./2024/aoc-2024-lean/Aoc/Day03.lean) |  [Day03.sql](./2024/aoc-2024-duckdb/Day03.sql) |
 |  |  |  [Day04.sql](./2024/aoc-2024-duckdb/Day04.sql) |
 |  |  |  [Day05.sql](./2024/aoc-2024-duckdb/Day05.sql) |
 
