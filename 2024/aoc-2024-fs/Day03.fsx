@@ -23,7 +23,6 @@ let parseInput input =
     | Success(instructions, _, _) -> instructions
     | _ -> failwithf "Parse error; incorrect input"
 
-
 let part1 instructions =
     instructions
     |> List.sumBy (function
