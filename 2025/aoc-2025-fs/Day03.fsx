@@ -18,7 +18,6 @@ let rec largestSubsequence length xs =
         []
     else
         let largestDigit, tail = candidateDigits xs |> List.maxBy fst
-
         largestDigit :: largestSubsequence (length - 1) tail
 
 let maxJoltage numBatteries bank =
