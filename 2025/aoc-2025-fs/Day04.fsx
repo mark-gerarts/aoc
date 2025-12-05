@@ -1,7 +1,3 @@
-type Pos = int * int
-
-type Grid = Set<Pos>
-
 let neighbours (x, y) =
     [ -1, -1; -1, 0; -1, 1; 0, -1; 0, 1; 1, -1; 1, 0; 1, 1 ]
     |> List.map (fun (dx, dy) -> x + dx, y + dy)
@@ -12,12 +8,8 @@ let grid =
             for x, char in Seq.indexed line do
                 if char = '@' then
                     yield x, y
-
     }
     |> Set.ofSeq
-
-
-let countPapers = Set.count
 
 let removeAccessiblePapers grid =
     let isAccessible p =
@@ -25,23 +17,14 @@ let removeAccessiblePapers grid =
 
     grid |> Set.filter (not << isAccessible)
 
-let rec keepRemoving grid =
-    seq {
-        yield grid
-        yield! keepRemoving <| removeAccessiblePapers grid
-    }
+let rec removeUntilStabilized grid =
+    match removeAccessiblePapers grid with
+    | newGrid when Set.count newGrid = Set.count grid -> grid
+    | newGrid -> removeUntilStabilized newGrid
 
-let paperCounts = keepRemoving grid |> Seq.map countPapers
-
-let stabilizedPaperCounts =
-    Seq.zip paperCounts (Seq.tail paperCounts)
-    |> Seq.takeWhile (fun (a, b) -> a <> b)
-    |> Seq.collect (fun (a, b) -> [ a; b ])
-    |> Seq.distinct
-
-let startingPaperCount = Seq.head stabilizedPaperCounts
-let countAfterOneStep = Seq.tail stabilizedPaperCounts |> Seq.head
-let stabilizedCount = Seq.last stabilizedPaperCounts
+let startingPaperCount = Set.count grid
+let countAfterOneStep = removeAccessiblePapers grid |> Set.count
+let stabilizedCount = removeUntilStabilized grid |> Set.count
 
 printfn "Part 1: %i" (startingPaperCount - countAfterOneStep)
 printfn "Part 2: %i" (startingPaperCount - stabilizedCount)
