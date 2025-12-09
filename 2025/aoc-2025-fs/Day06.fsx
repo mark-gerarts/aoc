@@ -11,7 +11,7 @@ let inputLines = System.IO.File.ReadLines "input/06.txt"
 let numberLines = inputLines |> Seq.rev |> Seq.tail |> Seq.rev
 let operations = inputLines |> Seq.last |> _.Replace(" ", "") |> Seq.map parseOp
 
-let parseNumbersPart1 =
+let parsePart1 =
     numberLines
     |> Seq.map (_.Trim() >> (fun s -> Regex.Split(s, " +")) >> Seq.map int64)
     |> Seq.transpose
@@ -20,7 +20,7 @@ let solve parsedNumbers =
     Seq.zip operations parsedNumbers
     |> Seq.sumBy (fun ((op, id), numbers) -> Seq.fold op id numbers)
 
-solve parseNumbersPart1 |> printfn "Part 1: %i"
+solve parsePart1 |> printfn "Part 1: %i"
 
 let splitOn pred source =
     let folder acc item =

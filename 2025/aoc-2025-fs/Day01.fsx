@@ -6,7 +6,7 @@ type Direction =
     | Left
     | Right
 
-let parseInput =
+let instructions =
     let parseLine (line: string) =
         match line[0], line[1..] with
         | 'L', rest -> Left, int rest
@@ -25,28 +25,17 @@ let rotateOne current direction =
 // The idea is to let rotate yield a list of all numbers we reached when
 // rotating. Then part 1 needs to look at the last number of the list, and part
 // 2 can count the number of zeroes in the list.
-let rec rotate counter (direction, amount) =
-    if amount > 0 then
-        let newCounter = rotateOne counter direction
-        newCounter :: rotate newCounter (direction, amount - 1)
-    else
-        []
+let rotate counter (direction, amount) =
+    Seq.replicate amount direction |> Seq.scan rotateOne counter |> Seq.tail
 
 let countZeros = Seq.filter ((=) 0) >> Seq.length
 
-parseInput
-|> Seq.scan (fun counter instruction -> rotate counter instruction |> Seq.last) 50
-|> countZeros
-|> printfn "Part 1: %i"
+let steps =
+    instructions
+    |> Seq.scan (fun stepList instruction -> rotate (Seq.last stepList) instruction) [ 50 ]
 
-parseInput
-|> Seq.fold
-    (fun (counter, zeros) instruction ->
-        let clicks = rotate counter instruction
-        Seq.last clicks, zeros + countZeros clicks)
-    (50, 0)
-|> snd
-|> printfn "Part 2: %i"
+steps |> Seq.map Seq.last |> countZeros |> printfn "Part 1: %i"
+steps |> Seq.collect id |> countZeros |> printfn "Part 2: %i"
 
 rotate 11 (Right, 8) |> should equal [ 12..19 ]
 rotate 19 (Left, 19) |> should equal [ 18..-1..0 ]

@@ -16,29 +16,20 @@ let inputIds =
         for lower, upper in ranges do
             yield! [ lower..upper ]
     }
+    |> Seq.filter ((<) 10)
     |> Seq.toArray
 
-let isRepeatedTwice id =
+let splits id =
     let id = string id
-    let left = id[0 .. id.Length / 2 - 1]
 
-    left + left = id
+    seq {
+        for numParts in { 2 .. id.Length } do
+            Seq.splitInto numParts id |> Seq.distinct |> Seq.length |> (=) 1
+    }
 
-let isRepeatedAtLeastTwice id =
-    let id = string id
-    let strlen = id.Length
+let isRepeatedTwice id = splits id |> Seq.head
+let isRepeatedAtLeastTwice id = splits id |> Seq.exists ((=) true)
 
-    let repeats =
-        seq {
-            for i in [ strlen / 2 .. -1 .. 1 ] do
-                if id = String.replicate (strlen / i) id[0 .. i - 1] then
-                    yield true
-        }
-
-    Seq.contains true repeats
-
-// The solution is okayish speed-wise, but since I don't have much F# async
-// experience, let's make it multithreaded.
 inputIds
 |> Array.Parallel.filter isRepeatedTwice
 |> Array.Parallel.sum

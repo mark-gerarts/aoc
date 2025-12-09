@@ -7,12 +7,9 @@ let input = System.IO.File.ReadLines "input/07.txt"
 let startPos = input |> Seq.head |> _.IndexOf("S"), 0
 let firstRow = (startPos, 1L) |> Seq.singleton |> Map.ofSeq
 
-// Mutable counter was just easier...
-let mutable numSplits = 0
-
 let splitterPositions =
     seq {
-        for y, line in System.IO.File.ReadLines "input/07.txt" |> Seq.indexed do
+        for y, line in input |> Seq.indexed do
             for x, cell in Seq.indexed line do
                 if cell = '^' then
                     x, y
@@ -20,6 +17,9 @@ let splitterPositions =
     |> Set.ofSeq
 
 let _, maxY = splitterPositions |> Set.maxElement
+
+// Mutable counter was just easier...
+let mutable numSplits = 0
 
 let nextRow prevRow =
     let newRow =
@@ -38,11 +38,7 @@ let nextRow prevRow =
     |> Seq.map (fun (p, cs) -> p, Seq.sumBy snd cs)
     |> Map.ofSeq
 
-let lastRow =
-    Seq.initInfinite id
-    |> Seq.scan (fun row _ -> nextRow row) firstRow
-    |> Seq.skip maxY
-    |> Seq.head
+let lastRow = Seq.fold (fun row _ -> nextRow row) firstRow { 0..maxY }
 
-numSplits |> printfn "Part 1: %i"
+printfn "Part 1: %i" numSplits
 lastRow |> Map.values |> Seq.sum |> printfn "Part 2: %i"
