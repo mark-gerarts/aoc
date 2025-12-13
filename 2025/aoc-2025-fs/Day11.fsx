@@ -5,25 +5,6 @@ let parseLine (line: string) =
     | [| node; outputNodes |] -> node, outputNodes.Split " " |> Array.toList
     | _ -> failwithf "Cannot parse line '%s'" line
 
-// Straightforward DFS.
-let part1 graph start destination =
-    let rec go searchSpace pathCount =
-        match searchSpace with
-        | [] -> pathCount
-        | (current, _) :: others when current = destination -> go others (pathCount + 1)
-        | (current, seen) :: others ->
-            match Map.tryFind current graph with
-            | None -> go others pathCount
-            | Some outNodes ->
-                let expandedPaths =
-                    outNodes
-                    |> List.filter (fun node -> not <| Set.contains node seen)
-                    |> List.map (fun node -> node, Set.add node seen)
-
-                go (expandedPaths @ others) pathCount
-
-    go [ (start, Set.singleton start) ] 0
-
 let nodes graph =
     graph
     |> Map.toSeq
@@ -32,10 +13,13 @@ let nodes graph =
 
 let updateAt f map key = Map.change key (Option.map f) map
 
+// Given a graph and a start node, returns the subgraph containing nodes
+// reachable from the start node.
 let subgraph graph start =
     let rec go subGraph frontier =
         match frontier with
         | [] -> subGraph
+        | node :: nodes when Map.containsKey node subGraph -> go subGraph nodes
         | node :: nodes ->
             let neighbours = Map.tryFind node graph |> Option.defaultValue []
             let newGraph = Map.add node neighbours subGraph
@@ -44,6 +28,7 @@ let subgraph graph start =
     go Map.empty [ start ]
 
 let topologicalOrdening (graph: Graph) =
+    // (node, outNodes) -> (node, inNodes)
     let reverseGraph =
         Map.toSeq graph
         |> Seq.collect (fun (src, dstList) -> Seq.map (fun n -> n, src) dstList)
@@ -57,11 +42,7 @@ let topologicalOrdening (graph: Graph) =
         |> Map.ofSeq
 
     let rec go indegrees ordening =
-        let nextNode =
-            indegrees
-            |> Map.tryPick (fun node indegree -> if indegree = 0 then Some node else None)
-
-        match nextNode with
+        match indegrees |> Map.tryFindKey (fun _ indegree -> indegree = 0) with
         | None -> List.rev ordening
         | Some node ->
             let neighbours = Map.tryFind node graph |> Option.defaultValue []
@@ -69,60 +50,40 @@ let topologicalOrdening (graph: Graph) =
             let newIndegrees =
                 List.fold (updateAt (fun x -> x - 1)) (Map.remove node indegrees) neighbours
 
-            let newOrdening = node :: ordening
-
-            go newIndegrees newOrdening
+            go newIndegrees (node :: ordening)
 
     go indegrees []
 
 let pathCount graph start dest =
-
-    printfn "Starting path count..."
-
     let subGraph = subgraph graph start
-
-    printfn "Got subgraph"
 
     let rec getWayCounts sortedNodes wayCounts =
         match sortedNodes with
         | [] -> wayCounts
         | node :: nodes ->
             let neighbours = Map.find node subGraph
-            let wayCount = Map.tryFind node wayCounts |> Option.defaultValue 0
+            let wayCount = Map.tryFind node wayCounts |> Option.defaultValue 0L
             let newWayCounts = List.fold (updateAt ((+) wayCount)) wayCounts neighbours
 
             getWayCounts nodes newWayCounts
 
-    let initialCounts = nodes subGraph |> Seq.map (fun n -> n, 0) |> Map.ofSeq
+    let initialCounts = nodes subGraph |> Seq.map (fun n -> n, 0L) |> Map.ofSeq
 
-    let pathCount =
-        getWayCounts (topologicalOrdening subGraph) (Map.add start 1 initialCounts)
-        |> Map.tryFind dest
-        |> Option.defaultValue 0
-
-    printfn "Pathcount %s->%s: %A" start dest pathCount
-
-    pathCount
-
-
+    getWayCounts (topologicalOrdening subGraph) (Map.add start 1L initialCounts)
+    |> Map.tryFind dest
+    |> Option.defaultValue 0L
 
 let graph =
     System.IO.File.ReadLines "input/11.txt" |> Seq.map parseLine |> Map.ofSeq
 
-//pathCount graph "you" "out" |> printfn "Part 1: %i"
+pathCount graph "you" "out" |> printfn "Part 1: %i"
 
-pathCount graph "svr" "fft" |> printfn "%A"
+let svr2fft = pathCount graph "svr" "fft"
+let svr2dac = pathCount graph "svr" "dac"
+let fft2out = pathCount graph "fft" "out"
+let dac2out = pathCount graph "dac" "out"
+let dac2fft = pathCount graph "dac" "fft"
+let fft2dac = pathCount graph "fft" "dac"
 
-(*
-async {
-    let! svr2fft = async { return pathCount graph "svr" "fft" }
-    and! svr2dac = async { return pathCount graph "svr" "dac" }
-    and! fft2out = async { return pathCount graph "fft" "out" }
-    and! dac2out = async { return pathCount graph "dac" "out" }
-    and! dac2fft = async { return pathCount graph "dac" "fft" }
-    and! fft2dac = async { return pathCount graph "fft" "dac" }
-
-    let possiblePaths = svr2fft * fft2dac * dac2out + svr2dac * dac2fft * fft2out
-    printfn "%A" possiblePaths
-}
-*)
+let possiblePaths = svr2fft * fft2dac * dac2out + svr2dac * dac2fft * fft2out
+printfn "Part 2: %i" possiblePaths
