@@ -1,10 +1,11 @@
 #r "nuget: FParsec,1.1.1"
+#r "nuget: Flips"
 
-#nowarn "57" // For Array.Parallel being experimental right now.
-
+open Flips
+open Flips.Types
 open FParsec
 
-type Toggle =
+type State =
     | On
     | Off
 
@@ -34,7 +35,7 @@ let rec applyWiring wiring state =
 let turnAllOff desiredState =
     List.replicate (List.length desiredState) Off
 
-let numStepsNeeded (desiredState, wirings, _) =
+let numStepsNeededPart1 (desiredState, wirings, _) =
     let rec go seenStates currentStates stepCount =
         let newStates =
             seq {
@@ -54,7 +55,42 @@ let numStepsNeeded (desiredState, wirings, _) =
 
     go (Set.singleton initial) (Set.singleton initial) 0
 
+// Model the problem as a set of linear equations, which we can pass to a
+// solver. E.g. for the line with buttons [0]; [1]; [0;1] and target [2;4], we
+// create the following equations:
+//
+// - b0 + b2 = 2
+// - b1 + b2 = 4
+// - total = b0 + b1
+//
+// where bi is the number of times button i is pressed. Then we solve while
+// minimizing `total`.
+let numStepsNeededPart2 (_, wirings, joltageLevels) =
+    let buttonExpressions =
+        wirings
+        |> Seq.indexed
+        |> Seq.map (fun (i, targets) ->
+            Decision.createInteger (sprintf "button%i" i) 0 infinity * 1.0, Set.ofList targets)
 
-System.IO.File.ReadLines "input/10.txt"
-|> Seq.sumBy (parseLine >> numStepsNeeded)
-|> printfn "Part 1: %i"
+    let wiringConstraints =
+        seq {
+            for target, count in Seq.indexed joltageLevels do
+                let relevantButtons =
+                    buttonExpressions |> Seq.filter (snd >> Set.contains target) |> Seq.map fst
+
+                Constraint.create (sprintf "Target%i" target) (Seq.sum relevantButtons == float count)
+        }
+
+    let total = buttonExpressions |> Seq.sumBy fst
+    let objective = Objective.create "Total presses" Minimize total
+
+    let model'' = Model.create objective |> Model.addConstraints wiringConstraints
+
+    match Solver.solve Settings.basic model'' with
+    | Optimal solution -> Objective.evaluate solution objective |> int
+    | _ -> failwithf "Unable to solve %A %A" wirings joltageLevels
+
+let lines = System.IO.File.ReadLines "input/10.txt" |> Seq.map parseLine
+
+lines |> Seq.sumBy numStepsNeededPart1 |> printfn "Part 1: %i"
+lines |> Seq.sumBy numStepsNeededPart2 |> printfn "Part 2: %i"
