@@ -3,6 +3,23 @@
 I use Advent of Code mostly as a playground to experiment with new programming
 languages.
 
+## [2025](./2025)
+
+| [F#](./2025/aoc-2025-fs) |
+| --- |
+|  [Day01.fsx](./2025/aoc-2025-fs/Day01.fsx) |
+|  [Day02.fsx](./2025/aoc-2025-fs/Day02.fsx) |
+|  [Day03.fsx](./2025/aoc-2025-fs/Day03.fsx) |
+|  [Day04.fsx](./2025/aoc-2025-fs/Day04.fsx) |
+|  [Day05.fsx](./2025/aoc-2025-fs/Day05.fsx) |
+|  [Day06.fsx](./2025/aoc-2025-fs/Day06.fsx) |
+|  [Day07.fsx](./2025/aoc-2025-fs/Day07.fsx) |
+|  [Day08.fsx](./2025/aoc-2025-fs/Day08.fsx) |
+|  [Day09.fsx](./2025/aoc-2025-fs/Day09.fsx) |
+|  [Day10.fsx](./2025/aoc-2025-fs/Day10.fsx) |
+|  [Day11.fsx](./2025/aoc-2025-fs/Day11.fsx) |
+|  [Day12.fsx](./2025/aoc-2025-fs/Day12.fsx) |
+
 ## [2024](./2024)
 
 | [F#](./2024/aoc-2024-fs) | [Lean](./2024/aoc-2024-lean) | [DuckDB](./2024/aoc-2024-duckdb) |
@@ -10,8 +27,8 @@ languages.
 |  [Day01.fsx](./2024/aoc-2024-fs/Day01.fsx) |  [Day01.lean](./2024/aoc-2024-lean/Aoc/Day01.lean) |  [Day01.sql](./2024/aoc-2024-duckdb/Day01.sql) |
 |  [Day02.fsx](./2024/aoc-2024-fs/Day02.fsx) |  [Day02.lean](./2024/aoc-2024-lean/Aoc/Day02.lean) |  [Day02.sql](./2024/aoc-2024-duckdb/Day02.sql) |
 |  [Day03.fsx](./2024/aoc-2024-fs/Day03.fsx) |  [Day03.lean](./2024/aoc-2024-lean/Aoc/Day03.lean) |  [Day03.sql](./2024/aoc-2024-duckdb/Day03.sql) |
-|  |  |  [Day04.sql](./2024/aoc-2024-duckdb/Day04.sql) |
-|  |  |  [Day05.sql](./2024/aoc-2024-duckdb/Day05.sql) |
+|  [Day04.fsx](./2024/aoc-2024-fs/Day04.fsx) |  |  [Day04.sql](./2024/aoc-2024-duckdb/Day04.sql) |
+|  [Day05.fsx](./2024/aoc-2024-fs/Day05.fsx) |  |  [Day05.sql](./2024/aoc-2024-duckdb/Day05.sql) |
 
 ## [2023](./2023)
 

@@ -15,10 +15,13 @@ let ranges, ids =
 
 let contains id (lower, upper) = lower <= id && id <= upper
 
-let isFresh id = ranges |> Seq.exists (contains id)
+let isFresh id = Seq.exists (contains id) ranges
 
 ids |> Seq.filter isFresh |> Seq.length |> printfn "Part 1: %i"
 
+// We sort all ranges. Then this function does the heavy lifting by deciding if
+// the ranges overlap, merging them together, or if they are two proper separate
+// ranges.
 let mergeConsecutiveRanges (l1, u1 as r1) (l2, u2 as r2) =
     if r1 = r2 then [ r1 ]
     elif l2 > u1 then [ r1; r2 ]

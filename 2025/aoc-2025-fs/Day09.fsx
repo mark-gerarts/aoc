@@ -76,9 +76,9 @@ let isInPolygon (p1, p2) =
 
         pointOnEdge || pointInside
 
-    //sidePoints (p1, p2) |> Seq.toArray |> Array.Parallel.forall pointInPolygon
     sidePoints (p1, p2) |> Seq.forall pointInPolygon
 
+// Takes long (2m30s) but it works...
 Seq.allPairs coords coords
 |> Seq.map (fun square -> square, size square)
 |> Seq.sortByDescending snd
@@ -86,8 +86,3 @@ Seq.allPairs coords coords
 |> Array.Parallel.tryFind (fst >> isInPolygon)
 |> (Option.get >> snd)
 |> printfn "Part 2: %i"
-
-
-// NOT: 4652231070 (too high)
-// NOT: 4472716059 (too high)
-// NOT: 12128 (too low)

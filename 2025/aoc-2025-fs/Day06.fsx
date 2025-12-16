@@ -6,7 +6,6 @@ let parseOp c =
     | '+' -> (+), 0L
     | _ -> failwithf "Unexpected symbol %c when parsing operation" c
 
-
 let inputLines = System.IO.File.ReadLines "input/06.txt"
 let numberLines = inputLines |> Seq.rev |> Seq.tail |> Seq.rev
 let operations = inputLines |> Seq.last |> _.Replace(" ", "") |> Seq.map parseOp

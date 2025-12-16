@@ -36,7 +36,6 @@ let initialCircuits = coords |> Seq.map Set.singleton |> Seq.toList
 
 let steps = sortedDistances |> Seq.map fst |> Seq.scan connect initialCircuits
 
-// 40 steps -> 23s
 steps
 |> Seq.item 1000
 |> Seq.map Set.count
