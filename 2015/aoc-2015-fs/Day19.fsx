@@ -1,18 +1,15 @@
-module AoC2015.Day19
-
 type Replacements = (string * string) list
 
-let parseInput filename =
-    let input = System.IO.File.ReadAllText filename
-    let parts = input.Trim().Split("\n\n")
+let parseInput =
+    let parts = System.IO.File.ReadAllText "input/19.txt" |> _.Trim() |> _.Split("\n\n")
     let replacements = parts[0]
     let inputString = parts[1]
 
     let parseReplacementLine (line: string) =
-        let parts = line.Split(" => ")
-        (parts[0], parts[1])
+        let parts = line.Split " => "
+        parts[0], parts[1]
 
-    (replacements.Split('\n') |> Seq.map parseReplacementLine |> Seq.toList, inputString)
+    replacements.Split '\n' |> Seq.map parseReplacementLine |> Seq.toList, inputString
 
 let generateMolecules (replacements: Replacements) (input: string) =
     let rec go (replacements: (string * string) list) (currentIndex: int) =
@@ -32,7 +29,7 @@ let reverseMolecule (replacements: Replacements) (molecule: string) =
         match currentReplacements with
         | [] -> steps
         | (l, r) :: xs ->
-            match molecule.IndexOf(r) with
+            match molecule.IndexOf r with
             | -1 -> go molecule xs steps
             | index ->
                 let newMolecule = molecule.Remove(index, String.length r).Insert(index, l)
@@ -40,8 +37,7 @@ let reverseMolecule (replacements: Replacements) (molecule: string) =
 
     go molecule replacements 0
 
-let run filename =
-    let (replacements, input) = parseInput filename
+let replacements, input = parseInput
 
-    generateMolecules replacements input |> List.length |> printfn "Part 1: %i"
-    reverseMolecule replacements input |> printfn "Part 2: %i"
+generateMolecules replacements input |> List.length |> printfn "Part 1: %i"
+reverseMolecule replacements input |> printfn "Part 2: %i"
