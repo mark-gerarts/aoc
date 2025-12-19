@@ -3,21 +3,7 @@
 Usage:
 
 ```bash
-$ dotnet run XX path/to/inputDayXX.txt
+dotnet fsi Day01.fsx
 ```
 
-Development:
-
-```bash
-$ dotnet watch run XX path/to/inputDayXX.txt
-```
-
-## Notes
-
-I've started using FParsec a bit here. For some puzzles, it is definitely
-overkill, but a good learning experience.
-
-Useful links:
-
-- [FParsec docs](https://www.quanttec.com/fparsec/)
-- [Another AoC repo with FParsec](https://github.com/matttgregg/aoc-fsharp)
+Inputs are expected to be in the `input` folder, e.g. `input/01.txt`.

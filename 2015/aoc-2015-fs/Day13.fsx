@@ -1,4 +1,4 @@
-module AoC2015.Day13
+#r "nuget: FParsec"
 
 open FParsec
 
@@ -14,7 +14,7 @@ type HappinessMap = Map<(Name * Name), int>
 let parseLine line =
     let pName = regex "[A-Z][a-z]+"
     let pPlus = pstring "gain " >>. pint32
-    let pMinus = pstring "lose " >>. pint32 |>> (fun gain -> -gain)
+    let pMinus = pstring "lose " >>. pint32 |>> fun gain -> -gain
     let pGain = choice [ pPlus; pMinus ]
 
     let pLine =
@@ -51,7 +51,7 @@ let calculateHappiness happinessMap (ordering: Name list) =
 
     let circular = List.append ordering [ List.head ordering ]
 
-    circular |> Seq.pairwise |> Seq.map happinessForPair |> Seq.sum
+    circular |> Seq.pairwise |> Seq.sumBy happinessForPair
 
 let getPeople happinessMap =
     happinessMap |> Map.keys |> Seq.map fst |> Seq.distinct |> Seq.toList
@@ -64,20 +64,16 @@ let solve happinessMap =
     |> Seq.max
 
 let insertMe happinessMap =
-    let me = "Me"
-
     let insertForOtherPerson map other =
-        map |> Map.add (other, me) 0 |> Map.add (me, other) 0
+        map |> Map.add (other, "Me") 0 |> Map.add ("Me", other) 0
 
     happinessMap |> getPeople |> List.fold insertForOtherPerson happinessMap
 
 
-let run filename =
-    let happinessMap =
-        filename
-        |> System.IO.File.ReadLines
-        |> Seq.map parseLine
-        |> Seq.fold addInputLine Map.empty
+let happinessMap =
+    System.IO.File.ReadLines "input/13.txt"
+    |> Seq.map parseLine
+    |> Seq.fold addInputLine Map.empty
 
-    happinessMap |> solve |> printfn "Part 1: %i"
-    happinessMap |> insertMe |> solve |> printfn "Part 2: %i"
+happinessMap |> solve |> printfn "Part 1: %i"
+happinessMap |> insertMe |> solve |> printfn "Part 2: %i"

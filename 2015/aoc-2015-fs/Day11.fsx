@@ -1,10 +1,8 @@
-module AoC2015.Day11
-
 let increment password =
     let rec go xs =
         match xs with
         | [] -> failwith "Overflow"
-        | x :: xs when x < 25 -> (x + 1) :: xs
+        | x :: xs when x < 25 -> x + 1 :: xs
         | _ :: xs -> 0 :: go xs
 
     List.rev password |> go |> List.rev
@@ -13,7 +11,7 @@ let isValid password =
     let containsIncreasing password =
         let isIncreasing window =
             match window with
-            | [ a; b; c ] -> (a + 1) = b && (b + 1) = c
+            | [ a; b; c ] -> a + 1 = b && b + 1 = c
             | _ -> false
 
         password |> List.windowed 3 |> List.exists isIncreasing
@@ -41,20 +39,15 @@ let toDigits password =
     password |> Seq.map (fun c -> int c - int 'a') |> Seq.toList
 
 let toString password =
-    password
-    |> Seq.map ((+) (int 'a'))
-    |> Seq.map char
-    |> Seq.toArray
-    |> System.String
+    password |> Seq.map ((+) (int 'a')) |> Seq.map char |> System.String.Concat
 
 let rec solve sequence =
     match isValid sequence with
     | true -> sequence
     | false -> sequence |> increment |> solve
 
-let run filename =
-    let sequence = filename |> System.IO.File.ReadLines |> Seq.head |> toDigits
-    let newSequence = solve sequence
+let sequence = System.IO.File.ReadLines "input/11.txt" |> Seq.head |> toDigits
+let newSequence = solve sequence
 
-    newSequence |> toString |> printfn "Part 1: %s"
-    newSequence |> increment |> solve |> toString |> printfn "Part 2: %s"
+newSequence |> toString |> printfn "Part 1: %s"
+newSequence |> increment |> solve |> toString |> printfn "Part 2: %s"

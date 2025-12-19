@@ -1,9 +1,7 @@
-module AoC2015.Day05
-
 open System.Text.RegularExpressions
 
 let contains3vowels (input: string) =
-    Regex.Replace(input, "[^aeoiu]", "") |> String.length |> ((<=) 3)
+    Regex.Replace(input, "[^aeoiu]", "") |> String.length |> (<=) 3
 
 let containsDup (input: string) =
     input |> Seq.pairwise |> Seq.exists (fun (a, b) -> a = b)
@@ -11,7 +9,7 @@ let containsDup (input: string) =
 let notContainsForbidden (input: string) =
     let forbidden = [| "ab"; "cd"; "pq"; "xy" |]
 
-    forbidden |> Array.exists input.Contains |> not
+    forbidden |> Array.forall (not << input.Contains)
 
 let containsTwoPairs (input: string) =
     let isOkPair (pair: string) =
@@ -31,15 +29,16 @@ let containsRepeatWithSpace (input: string) =
 
     input |> Seq.windowed 3 |> Seq.exists isRepeatWithSpace
 
-let isNice conditions input =
-    conditions |> Array.forall (fun f -> f input)
+let satisfies conditions input =
+    List.forall (fun f -> f input) conditions
 
-let solve conditions file =
-    file |> System.IO.File.ReadLines |> Seq.filter (isNice conditions) |> Seq.length
+let solve conditions =
+    System.IO.File.ReadLines "input/05.txt"
+    |> Seq.filter (satisfies conditions)
+    |> Seq.length
 
-let run file =
-    let conditionsPart1 = [| contains3vowels; containsDup; notContainsForbidden |]
-    let conditionsPart2 = [| containsTwoPairs; containsRepeatWithSpace |]
+let conditionsPart1 = [ contains3vowels; containsDup; notContainsForbidden ]
+let conditionsPart2 = [ containsTwoPairs; containsRepeatWithSpace ]
 
-    file |> solve conditionsPart1 |> printfn "Part 1: %i"
-    file |> solve conditionsPart2 |> printfn "Part 2: %i"
+solve conditionsPart1 |> printfn "Part 1: %i"
+solve conditionsPart2 |> printfn "Part 2: %i"

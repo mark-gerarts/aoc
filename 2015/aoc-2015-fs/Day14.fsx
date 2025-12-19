@@ -1,5 +1,3 @@
-module AoC2015.Day14
-
 open System.Text.RegularExpressions
 
 type Reindeer =
@@ -9,8 +7,7 @@ type Reindeer =
       rests: int }
 
 let parseLine line =
-    let matches =
-        Regex("\d+").Matches(line) |> Seq.toArray |> Array.map (fun m -> int m.Value)
+    let matches = Regex("\d+").Matches line |> Seq.toArray |> Array.map (_.Value >> int)
 
     let name = line.Split(" ")[0]
 
@@ -43,13 +40,12 @@ let solvePart2 reindeer =
 
         Seq.map (fun d -> if d = max then 1 else 0) distances
 
-    Seq.init 2503 (fun i -> i + 1)
+    { 1..2503 }
     |> Seq.map intermediateScore
     |> Seq.reduce (fun a b -> Seq.map2 (+) a b)
     |> Seq.max
 
-let run filename =
-    let reindeer = filename |> System.IO.File.ReadLines |> Seq.map parseLine
+let reindeer = System.IO.File.ReadLines "input/14.txt" |> Seq.map parseLine
 
-    reindeer |> solvePart1 |> printfn "Part 1: %i"
-    reindeer |> solvePart2 |> printfn "Part 2: %i"
+reindeer |> solvePart1 |> printfn "Part 1: %i"
+reindeer |> solvePart2 |> printfn "Part 2: %i"
