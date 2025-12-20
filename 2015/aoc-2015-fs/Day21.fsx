@@ -1,4 +1,4 @@
-module AoC2015.Day21
+open System.Text.RegularExpressions
 
 type ItemType =
     | Weapon
@@ -39,20 +39,26 @@ let ring cost dmg def =
       def = def
       dmg = dmg }
 
-// Hardcoding is way faster then parsing.
-let boss = { hp = 108; dmg = 8; def = 2; cost = 0 }
-
 let player = { hp = 100; dmg = 0; def = 0; cost = 0 }
 
+let boss =
+    let input = System.IO.File.ReadAllText "input/21.txt"
+    let stats = Regex("\d+").Matches(input) |> Seq.map (_.Value >> int) |> Seq.toArray
+
+    { hp = stats[0]
+      dmg = stats[1]
+      def = stats[2]
+      cost = 0 }
+
 let shop =
-    ([ weapon 8 4; weapon 10 5; weapon 25 6; weapon 40 7; weapon 74 8 ],
-     [ armor 13 1; armor 31 2; armor 53 3; armor 75 4; armor 102 5 ],
-     [ ring 25 1 0
-       ring 50 2 0
-       ring 100 3 0
-       ring 20 0 1
-       ring 40 0 2
-       ring 80 0 3 ])
+    [ weapon 8 4; weapon 10 5; weapon 25 6; weapon 40 7; weapon 74 8 ],
+    [ armor 13 1; armor 31 2; armor 53 3; armor 75 4; armor 102 5 ],
+    [ ring 25 1 0
+      ring 50 2 0
+      ring 100 3 0
+      ring 20 0 1
+      ring 40 0 2
+      ring 80 0 3 ]
 
 let equip (character: Character) (item: Item) =
     { character with
@@ -79,7 +85,6 @@ let getItemCombinations (weapons, armor, rings) =
                     yield ring @ armor @ weapon
     }
 
-
 let fight char1 char2 =
     let turnsNeeded (char1: Character) (char2: Character) =
         let dmgChar1 =
@@ -94,17 +99,16 @@ let fight char1 char2 =
     else
         Lose
 
-let run _ =
-    getItemCombinations shop
-    |> Seq.map (Seq.fold equip player)
-    |> Seq.filter (fun c -> fight c boss = Win)
-    |> Seq.map (fun c -> c.cost)
-    |> Seq.min
-    |> printfn "Part 1: %d"
+getItemCombinations shop
+|> Seq.map (Seq.fold equip player)
+|> Seq.filter (fun c -> fight c boss = Win)
+|> Seq.map (fun c -> c.cost)
+|> Seq.min
+|> printfn "Part 1: %d"
 
-    getItemCombinations shop
-    |> Seq.map (Seq.fold equip player)
-    |> Seq.filter (fun c -> fight c boss = Lose)
-    |> Seq.map (fun c -> c.cost)
-    |> Seq.max
-    |> printfn "Part 2: %d"
+getItemCombinations shop
+|> Seq.map (Seq.fold equip player)
+|> Seq.filter (fun c -> fight c boss = Lose)
+|> Seq.map (fun c -> c.cost)
+|> Seq.max
+|> printfn "Part 2: %d"

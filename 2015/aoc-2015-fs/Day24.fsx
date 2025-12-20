@@ -1,5 +1,3 @@
-module AoC2015.Day24
-
 let quantumEntanglement = List.reduce (fun a b -> a * b)
 
 let rec passengerCompartments input desiredSum =
@@ -24,12 +22,13 @@ let rec passengerCompartments input desiredSum =
 
     tryWithIncreasingSize 1
 
-let solve filename numGroups =
-    let input = filename |> System.IO.File.ReadAllLines |> Seq.map uint64 |> Seq.toList
-    let desiredSum = List.sum input / (uint64 numGroups)
+let solve numGroups =
+    let input =
+        System.IO.File.ReadAllLines "input/24.txt" |> Seq.map uint64 |> Seq.toList
+
+    let desiredSum = List.sum input / uint64 numGroups
 
     passengerCompartments input desiredSum |> Seq.map quantumEntanglement |> Seq.min
 
-let run filename =
-    solve filename 3 |> printfn "Part 1: %i"
-    solve filename 4 |> printfn "Part 2: %i"
+solve 3 |> printfn "Part 1: %i"
+solve 4 |> printfn "Part 2: %i"

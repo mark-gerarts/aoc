@@ -1,4 +1,4 @@
-module AoC2015.Day22
+open System.Text.RegularExpressions
 
 type Character =
     { hp: int
@@ -60,6 +60,16 @@ let hardDebuff =
       spellType = HardDebuff
       duration = 9999 }
 
+let boss =
+    let input = System.IO.File.ReadAllText "input/22.txt"
+    let stats = Regex("\d+").Matches input |> Seq.map (_.Value >> int) |> Seq.toArray
+
+    { hp = stats[0]
+      dmg = stats[1]
+      def = 0
+      mana = 0
+      totalManaSpent = 0 }
+
 let initialState =
     { player =
         { hp = 50
@@ -67,12 +77,7 @@ let initialState =
           def = 0
           mana = 500
           totalManaSpent = 0 }
-      boss =
-        { hp = 58
-          dmg = 9
-          def = 0
-          mana = 0
-          totalManaSpent = 0 }
+      boss = boss
       activeSpells = [] }
 
 let damage character amount =
@@ -201,13 +206,12 @@ let rec search state =
             | _ -> yield! search state
     }
 
-let run _ =
-    search initialState |> Seq.min |> printfn "Part 1: %i"
+search initialState |> Seq.min |> printfn "Part 1: %i"
 
-    bestRun <- 9999999
+bestRun <- 9999999
 
-    let part2 =
-        { initialState with
-            activeSpells = [ hardDebuff ] }
+let part2 =
+    { initialState with
+        activeSpells = [ hardDebuff ] }
 
-    search part2 |> Seq.min |> printfn "Part 2: %i"
+search part2 |> Seq.min |> printfn "Part 2: %i"

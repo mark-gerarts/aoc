@@ -1,5 +1,3 @@
-module AoC2015.Day23
-
 type Register =
     | A
     | B
@@ -66,7 +64,7 @@ let parseRegister (r: string) =
     | _ -> failwithf "Invalid register %s" r
 
 let parseLine (line: string) =
-    let parts = line.Split(' ')
+    let parts = line.Split ' '
 
     match parts[0] with
     | "hlf" -> parseRegister parts[1] |> Half
@@ -77,14 +75,13 @@ let parseLine (line: string) =
     | "jio" -> JumpIfOne(parseRegister parts[1], int parts[2])
     | s -> failwithf "Invalid instruction '%s'" s
 
-let run filename =
-    let program =
-        filename |> System.IO.File.ReadAllLines |> Seq.map parseLine |> Seq.toArray
+let program =
+    System.IO.File.ReadAllLines "input/23.txt" |> Seq.map parseLine |> Seq.toArray
 
-    let computer = { a = 0; b = 0; index = 0 }
+let computer = { a = 0; b = 0; index = 0 }
 
-    let result1 = runProgram program computer
-    let result2 = runProgram program { computer with a = 1 }
+let result1 = runProgram program computer
+let result2 = runProgram program { computer with a = 1 }
 
-    printfn "Part 1: %i" (result1.b)
-    printfn "Part 2: %i" (result2.b)
+printfn "Part 1: %i" result1.b
+printfn "Part 2: %i" result2.b

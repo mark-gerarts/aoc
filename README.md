@@ -166,31 +166,31 @@ languages.
 
 | [F#](./2015/aoc-2015-fs) | [Lean](./2015/aoc-2015-lean) | [Nim](./2015/aoc-2015-nim) |
 | --- | --- | --- |
-|  [Day01.fs](./2015/aoc-2015-fs/Day01.fs) |  [Day01.lean](./2015/aoc-2015-lean/Aoc/Day01.lean) |  [day01.nim](./2015/aoc-2015-nim/day01.nim) |
-|  [Day02.fs](./2015/aoc-2015-fs/Day02.fs) |  [Day02.lean](./2015/aoc-2015-lean/Aoc/Day02.lean) |  [day02.nim](./2015/aoc-2015-nim/day02.nim) |
-|  [Day03.fs](./2015/aoc-2015-fs/Day03.fs) |  |  |
-|  [Day04.fs](./2015/aoc-2015-fs/Day04.fs) |  |  |
-|  [Day05.fs](./2015/aoc-2015-fs/Day05.fs) |  |  |
-|  [Day06.fs](./2015/aoc-2015-fs/Day06.fs) |  |  |
-|  [Day07.fs](./2015/aoc-2015-fs/Day07.fs) |  |  |
-|  [Day08.fs](./2015/aoc-2015-fs/Day08.fs) |  |  |
-|  [Day09.fs](./2015/aoc-2015-fs/Day09.fs) |  |  |
-|  [Day10.fs](./2015/aoc-2015-fs/Day10.fs) |  |  |
-|  [Day11.fs](./2015/aoc-2015-fs/Day11.fs) |  |  |
-|  [Day12.fs](./2015/aoc-2015-fs/Day12.fs) |  |  |
-|  [Day13.fs](./2015/aoc-2015-fs/Day13.fs) |  |  |
-|  [Day14.fs](./2015/aoc-2015-fs/Day14.fs) |  |  |
-|  [Day15.fs](./2015/aoc-2015-fs/Day15.fs) |  |  |
-|  [Day16.fs](./2015/aoc-2015-fs/Day16.fs) |  |  |
-|  [Day17.fs](./2015/aoc-2015-fs/Day17.fs) |  |  |
-|  [Day18.fs](./2015/aoc-2015-fs/Day18.fs) |  |  |
-|  [Day19.fs](./2015/aoc-2015-fs/Day19.fs) |  |  |
-|  [Day20.fs](./2015/aoc-2015-fs/Day20.fs) |  |  |
-|  [Day21.fs](./2015/aoc-2015-fs/Day21.fs) |  |  |
-|  [Day22.fs](./2015/aoc-2015-fs/Day22.fs) |  |  |
-|  [Day23.fs](./2015/aoc-2015-fs/Day23.fs) |  |  |
-|  [Day24.fs](./2015/aoc-2015-fs/Day24.fs) |  |  |
-|  [Day25.fs](./2015/aoc-2015-fs/Day25.fs) |  |  |
+|  [Day01.fsx](./2015/aoc-2015-fs/Day01.fsx) |  [Day01.lean](./2015/aoc-2015-lean/Aoc/Day01.lean) |  [day01.nim](./2015/aoc-2015-nim/day01.nim) |
+|  [Day02.fsx](./2015/aoc-2015-fs/Day02.fsx) |  [Day02.lean](./2015/aoc-2015-lean/Aoc/Day02.lean) |  [day02.nim](./2015/aoc-2015-nim/day02.nim) |
+|  [Day03.fsx](./2015/aoc-2015-fs/Day03.fsx) |  |  |
+|  [Day04.fsx](./2015/aoc-2015-fs/Day04.fsx) |  |  |
+|  [Day05.fsx](./2015/aoc-2015-fs/Day05.fsx) |  |  |
+|  [Day06.fsx](./2015/aoc-2015-fs/Day06.fsx) |  |  |
+|  [Day07.fsx](./2015/aoc-2015-fs/Day07.fsx) |  |  |
+|  [Day08.fsx](./2015/aoc-2015-fs/Day08.fsx) |  |  |
+|  [Day09.fsx](./2015/aoc-2015-fs/Day09.fsx) |  |  |
+|  [Day10.fsx](./2015/aoc-2015-fs/Day10.fsx) |  |  |
+|  [Day11.fsx](./2015/aoc-2015-fs/Day11.fsx) |  |  |
+|  [Day12.fsx](./2015/aoc-2015-fs/Day12.fsx) |  |  |
+|  [Day13.fsx](./2015/aoc-2015-fs/Day13.fsx) |  |  |
+|  [Day14.fsx](./2015/aoc-2015-fs/Day14.fsx) |  |  |
+|  [Day15.fsx](./2015/aoc-2015-fs/Day15.fsx) |  |  |
+|  [Day16.fsx](./2015/aoc-2015-fs/Day16.fsx) |  |  |
+|  [Day17.fsx](./2015/aoc-2015-fs/Day17.fsx) |  |  |
+|  [Day18.fsx](./2015/aoc-2015-fs/Day18.fsx) |  |  |
+|  [Day19.fsx](./2015/aoc-2015-fs/Day19.fsx) |  |  |
+|  [Day20.fsx](./2015/aoc-2015-fs/Day20.fsx) |  |  |
+|  [Day21.fsx](./2015/aoc-2015-fs/Day21.fsx) |  |  |
+|  [Day22.fsx](./2015/aoc-2015-fs/Day22.fsx) |  |  |
+|  [Day23.fsx](./2015/aoc-2015-fs/Day23.fsx) |  |  |
+|  [Day24.fsx](./2015/aoc-2015-fs/Day24.fsx) |  |  |
+|  [Day25.fsx](./2015/aoc-2015-fs/Day25.fsx) |  |  |
 
 ```text
                                  |
