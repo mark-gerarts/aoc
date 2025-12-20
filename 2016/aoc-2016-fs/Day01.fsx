@@ -1,84 +1,85 @@
-module AoC2016.Day01
-
-type Action =
-    | Left of int
-    | Right of int
-
 type Direction =
+    | Left
+    | Right
+    | Same
+
+type Orientation =
     | North
     | East
     | South
     | West
 
-type Pos = int * int
+type State =
+    { position: int * int
+      orientation: Orientation
+      seen: Set<int * int> }
 
-type State = Pos list * Direction
+let turn orientation direction =
+    match orientation, direction with
+    | North, Left -> West
+    | North, Right -> East
+    | East, Left -> North
+    | East, Right -> South
+    | South, Left -> East
+    | South, Right -> West
+    | West, Left -> South
+    | West, Right -> North
+    | _, Same -> orientation
 
-let changeDirection currentDir action =
-    let directions = [| North; East; South; West |]
-    let currentIndex = Array.findIndex ((=) currentDir) directions
+let step state direction =
+    let newOrientation = turn state.orientation direction
 
-    let nextIndex =
-        match action with
-        | Left _ -> currentIndex - 1
-        | Right _ -> currentIndex + 1
+    let x, y = state.position
 
-    directions[(nextIndex + 4) % 4]
+    let newPos =
+        match newOrientation with
+        | North -> x, y + 1
+        | East -> x + 1, y
+        | South -> x, y - 1
+        | West -> x - 1, y
 
-let amount action =
-    match action with
-    | Left amount -> amount
-    | Right amount -> amount
+    { position = newPos
+      orientation = newOrientation
+      seen = Set.add newPos state.seen }
 
-let moveOne ((x, y), dir) amount =
-    match dir with
-    | North -> (x, y + amount)
-    | South -> (x, y - amount)
-    | East -> (x + amount, y)
-    | West -> (x - amount, y)
+let distance (x1, y1) (x2, y2) = abs (x2 - x1) + abs (y2 - y1)
 
-let rec moveN (pos, dir) amount =
-    if amount = 0 then
-        pos
-    else
-        pos :: [moveOne pos dir]
+let parseLine (line: string) =
+    let parseInstruction (instruction: string) =
+        let direction = if instruction[0] = 'L' then Left else Right
+        direction, int (instruction[1..])
 
-let applyAction (pos, dir) action =
-    let newDir = changeDirection dir action
-    let currentPos = List.head pos
+    line.Split ", " |> Seq.map parseInstruction |> Seq.toList
 
-    let newPos = move (pos, newDir) (amount action)
-    (newPos, newDir)
+let splitInstructions instructions =
+    let splitInstruction (dir, amount) =
+        [ dir ] @ List.replicate (amount - 1) Same
 
-let parse (input: string) =
-    let parseAction (action: string) =
-        let amount = action.Substring(1) |> int
+    List.collect splitInstruction instructions
 
-        match action[0] with
-        | 'L' -> Left amount
-        | 'R' -> Right amount
-        | c -> failwithf "Invalid dir %c" c
+let instructions =
+    System.IO.File.ReadAllText "input/01.txt" |> parseLine |> splitInstructions
 
-    input.Trim().Split(", ") |> Seq.map parseAction
+let initialState =
+    { position = 0, 0
+      orientation = North
+      seen = Set.empty }
 
-let distance (x1, y1) (x2, y2) = abs (x1 - x2) + abs (y1 - y2)
+let rec applyInstructions state instructions checkSeen =
+    match instructions with
+    | [] -> state.position
+    | instruction :: instructions ->
+        let newState = step state instruction
 
-let run filename =
-    let actions = filename |> System.IO.File.ReadAllText |> parse
-    let path = actions |> Seq.scan applyAction ((0, 0), North) |> Seq.map fst
+        if checkSeen && Set.contains newState.position state.seen then
+            newState.position
+        else
+            applyInstructions newState instructions checkSeen
 
-    path |> Seq.last |> distance (0, 0) |> printfn "Part 1: %i"
+applyInstructions initialState instructions false
+|> distance initialState.position
+|> printfn "Part 1: %i"
 
-    path
-    |> Seq.scan
-        (fun (seen, _) p ->
-            if Set.contains p seen then
-                (seen, Some p)
-            else
-                (Set.add p seen, None))
-        (Set.empty, None)
-    |> Seq.toList
-    |> printfn "%A"
-(* |> Seq.pick snd
-    |> distance (0, 0)
-    |> printfn "Part 2: %A" *)
+applyInstructions initialState instructions true
+|> distance initialState.position
+|> printfn "Part 2: %i"
