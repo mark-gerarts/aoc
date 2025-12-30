@@ -5,7 +5,7 @@ let parseLine (line: string) =
 
 let isValidTriangle sides =
     match List.sort sides with
-    | [a; b; c] -> a + b > c
+    | [ a; b; c ] -> a + b > c
     | _ -> false
 
 let countValidTriangles triangles =
