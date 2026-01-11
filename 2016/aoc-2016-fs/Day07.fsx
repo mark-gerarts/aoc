@@ -36,7 +36,37 @@ let supportsTLS ipv7 =
 
     abbaInNormal && not abbaInHyper
 
-System.IO.File.ReadAllLines "input/07.txt"
-|> Seq.filter supportsTLS
-|> Seq.length
-|> printfn "Part 1: %i"
+let ABAtoBAB (aba: string) =
+    let a1 = aba[0]
+    let b = aba[1]
+    let a2 = aba[2]
+
+    if a1 = a2 && a1 <> b then
+        Some <| System.String.Concat [ b; a1; b ]
+    else
+        None
+
+let supportsSSL ipv7 =
+    let parts = parse ipv7
+
+    let allNormals =
+        parts
+        |> Seq.filter _.IsNormal
+        |> Seq.map value
+        |> Seq.collect (Seq.windowed 3 >> Seq.map System.String.Concat)
+
+    let allHypers =
+        parts
+        |> Seq.filter _.IsHypernet
+        |> Seq.map value
+        |> Seq.collect (Seq.windowed 3 >> Seq.map System.String.Concat)
+        |> Set.ofSeq
+
+    allNormals
+    |> Seq.choose ABAtoBAB
+    |> Seq.exists (fun x -> Set.contains x allHypers)
+
+
+let input = System.IO.File.ReadAllLines "input/07.txt"
+input |> Seq.filter supportsTLS |> Seq.length |> printfn "Part 1: %i"
+input |> Seq.filter supportsSSL |> Seq.length |> printfn "Part 2: %i"
