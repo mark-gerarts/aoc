@@ -1,3 +1,5 @@
+⚠️ This repository has been migrated to [Codeberg](https://codeberg.org/mark-gerarts/aoc).
+
 # Advent Of Code
 
 I use Advent of Code mostly as a playground to experiment with new programming
