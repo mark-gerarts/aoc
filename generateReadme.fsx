@@ -127,9 +127,23 @@ I use Advent of Code mostly as a playground to experiment with new programming
 languages.
 "
 
+let rec enumerateFilesFiltered (targetDir: string) (excludedDirs: Set<string>) =
+    seq {
+        yield! Directory.EnumerateFiles(targetDir)
+
+        let subDirs =
+            Directory.EnumerateDirectories(targetDir)
+            |> Seq.filter (fun d ->
+                let name = Path.GetFileName(d)
+                not (excludedDirs.Contains name))
+
+        for dir in subDirs do
+            yield! enumerateFilesFiltered dir excludedDirs
+    }
+
+// TODO: this also traverses in ocicl files, which is not good...
 let solutions =
-    let options = EnumerationOptions(RecurseSubdirectories = true)
-    Directory.EnumerateFiles(".", "*", options)
+    enumerateFilesFiltered "." (Set.ofList ["ocicl"])
         |> Seq.choose parsePath
         |> Seq.map (fun s -> (s.year, s.language, s.day, s.part), s)
         |> Seq.sort

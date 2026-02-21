@@ -1,5 +1,3 @@
-⚠️ This repository has been migrated to [Codeberg](https://codeberg.org/mark-gerarts/aoc).
-
 # Advent Of Code
 
 I use Advent of Code mostly as a playground to experiment with new programming
@@ -7,20 +5,20 @@ languages.
 
 ## [2025](./2025)
 
-| [F#](./2025/aoc-2025-fs) |
-| --- |
-|  [Day01.fsx](./2025/aoc-2025-fs/Day01.fsx) |
-|  [Day02.fsx](./2025/aoc-2025-fs/Day02.fsx) |
-|  [Day03.fsx](./2025/aoc-2025-fs/Day03.fsx) |
-|  [Day04.fsx](./2025/aoc-2025-fs/Day04.fsx) |
-|  [Day05.fsx](./2025/aoc-2025-fs/Day05.fsx) |
-|  [Day06.fsx](./2025/aoc-2025-fs/Day06.fsx) |
-|  [Day07.fsx](./2025/aoc-2025-fs/Day07.fsx) |
-|  [Day08.fsx](./2025/aoc-2025-fs/Day08.fsx) |
-|  [Day09.fsx](./2025/aoc-2025-fs/Day09.fsx) |
-|  [Day10.fsx](./2025/aoc-2025-fs/Day10.fsx) |
-|  [Day11.fsx](./2025/aoc-2025-fs/Day11.fsx) |
-|  [Day12.fsx](./2025/aoc-2025-fs/Day12.fsx) |
+| [F#](./2025/aoc-2025-fs) | [Lisp](./2025/aoc-2025-cl) |
+| --- | --- |
+|  [Day01.fsx](./2025/aoc-2025-fs/Day01.fsx) |  [01.lisp](./2025/aoc-2025-cl/01.lisp) |
+|  [Day02.fsx](./2025/aoc-2025-fs/Day02.fsx) |  |
+|  [Day03.fsx](./2025/aoc-2025-fs/Day03.fsx) |  |
+|  [Day04.fsx](./2025/aoc-2025-fs/Day04.fsx) |  |
+|  [Day05.fsx](./2025/aoc-2025-fs/Day05.fsx) |  |
+|  [Day06.fsx](./2025/aoc-2025-fs/Day06.fsx) |  |
+|  [Day07.fsx](./2025/aoc-2025-fs/Day07.fsx) |  |
+|  [Day08.fsx](./2025/aoc-2025-fs/Day08.fsx) |  |
+|  [Day09.fsx](./2025/aoc-2025-fs/Day09.fsx) |  |
+|  [Day10.fsx](./2025/aoc-2025-fs/Day10.fsx) |  |
+|  [Day11.fsx](./2025/aoc-2025-fs/Day11.fsx) |  |
+|  [Day12.fsx](./2025/aoc-2025-fs/Day12.fsx) |  |
 
 ## [2024](./2024)
 
@@ -30,7 +28,7 @@ languages.
 |  [Day02.fsx](./2024/aoc-2024-fs/Day02.fsx) |  [Day02.lean](./2024/aoc-2024-lean/Aoc/Day02.lean) |  [Day02.sql](./2024/aoc-2024-duckdb/Day02.sql) |
 |  [Day03.fsx](./2024/aoc-2024-fs/Day03.fsx) |  [Day03.lean](./2024/aoc-2024-lean/Aoc/Day03.lean) |  [Day03.sql](./2024/aoc-2024-duckdb/Day03.sql) |
 |  [Day04.fsx](./2024/aoc-2024-fs/Day04.fsx) |  |  [Day04.sql](./2024/aoc-2024-duckdb/Day04.sql) |
-|  [Day05.fsx](./2024/aoc-2024-fs/Day05.fsx) |  |  [Day05.sql](./2024/aoc-2024-duckdb/Day05.sql) |
+|  |  |  [Day05.sql](./2024/aoc-2024-duckdb/Day05.sql) |
 
 ## [2023](./2023)
 
@@ -138,31 +136,15 @@ languages.
 
 | [F#](./2016/aoc-2016-fs) |
 | --- |
-|  [Day01.fs](./2016/aoc-2016-fs/Day01.fs) |
-|  [Day02.fs](./2016/aoc-2016-fs/Day02.fs) |
-|  [Day03.fs](./2016/aoc-2016-fs/Day03.fs) |
-|  [Day04.fs](./2016/aoc-2016-fs/Day04.fs) |
-|  [Day05.fs](./2016/aoc-2016-fs/Day05.fs) |
-|  [Day06.fs](./2016/aoc-2016-fs/Day06.fs) |
-|  [Day07.fs](./2016/aoc-2016-fs/Day07.fs) |
-|  [Day08.fs](./2016/aoc-2016-fs/Day08.fs) |
-|  [Day09.fs](./2016/aoc-2016-fs/Day09.fs) |
-|  [Day10.fs](./2016/aoc-2016-fs/Day10.fs) |
-|  [Day11.fs](./2016/aoc-2016-fs/Day11.fs) |
-|  [Day12.fs](./2016/aoc-2016-fs/Day12.fs) |
-|  [Day13.fs](./2016/aoc-2016-fs/Day13.fs) |
-|  [Day14.fs](./2016/aoc-2016-fs/Day14.fs) |
-|  [Day15.fs](./2016/aoc-2016-fs/Day15.fs) |
-|  [Day16.fs](./2016/aoc-2016-fs/Day16.fs) |
-|  [Day17.fs](./2016/aoc-2016-fs/Day17.fs) |
-|  [Day18.fs](./2016/aoc-2016-fs/Day18.fs) |
-|  [Day19.fs](./2016/aoc-2016-fs/Day19.fs) |
-|  [Day20.fs](./2016/aoc-2016-fs/Day20.fs) |
-|  [Day21.fs](./2016/aoc-2016-fs/Day21.fs) |
-|  [Day22.fs](./2016/aoc-2016-fs/Day22.fs) |
-|  [Day23.fs](./2016/aoc-2016-fs/Day23.fs) |
-|  [Day24.fs](./2016/aoc-2016-fs/Day24.fs) |
-|  [Day25.fs](./2016/aoc-2016-fs/Day25.fs) |
+|  [Day01.fsx](./2016/aoc-2016-fs/Day01.fsx) |
+|  [Day02.fsx](./2016/aoc-2016-fs/Day02.fsx) |
+|  [Day03.fsx](./2016/aoc-2016-fs/Day03.fsx) |
+|  [Day04.fsx](./2016/aoc-2016-fs/Day04.fsx) |
+|  [Day05.fsx](./2016/aoc-2016-fs/Day05.fsx) |
+|  [Day06.fsx](./2016/aoc-2016-fs/Day06.fsx) |
+|  [Day07.fsx](./2016/aoc-2016-fs/Day07.fsx) |
+|  [Day08.fsx](./2016/aoc-2016-fs/Day08.fsx) |
+|  [Day09.fsx](./2016/aoc-2016-fs/Day09.fsx) |
 
 ## [2015](./2015)
 
