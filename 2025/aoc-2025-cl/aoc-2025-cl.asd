@@ -3,4 +3,5 @@
   :author      "Mark Gerarts"
   :license     "MIT"
   :version     "0.1.0"
-  :depends-on  (:serapeum :alexandria :trivia))
+  :depends-on  (:serapeum :alexandria :trivia)
+  :components ((:file "package")))

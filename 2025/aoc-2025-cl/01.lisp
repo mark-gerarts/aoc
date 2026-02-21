@@ -1,27 +1,31 @@
-;; Useful Slime command: C-c ~
 (in-package :aoc-2025-cl)
 
-;; Take a look at this
-;; https://lispcookbook.github.io/cl-cookbook/emacs-ide.html
-
-(deftype instruction ()
-  '(sr:tuple (member :left :right) integer))
-
-(sr:-> parse-line (string) instruction)
 (defun parse-line (line)
-  (let ((dir (tr:match (char line 0)
-               (#\L :left)
-               (#\R :right)))
+  (let ((direction (case (char line 0) (#\L :left) (#\R :right)))
         (amount (parse-integer line :start 1)))
-    (list dir amount)))
-
-(parse-line "L123")
+    (cons direction amount)))
 
 (defun parse-input ()
-  (sr:~>> "input/01.test"
-    ax:read-file-into-string
-    sr:lines
-    (mapcar #'parse-line)))
+  (sr:~>> "input/01.txt"
+          uiop:read-file-lines
+          (remove-if #'ax:emptyp)
+          (mapcar #'parse-line)))
 
-(loop for instruction in (parse-input)
-      do (format t "~A~%" instruction))
+(defun turn-dial-one-step (dial direction)
+  (sr:~> direction
+         (tr:match (:left -1) (:right 1))
+         (+ dial)
+         (mod 100)))
+
+(defun run-input ()
+  (loop with dial = 50
+        for (direction . amount) in (parse-input)
+        collect (loop repeat amount
+                      do (setf dial (turn-dial-one-step dial direction))
+                      collect dial)))
+
+(loop for sequence in (run-input)
+      sum (count-if #'zerop sequence) into total-part-2
+      when (zerop (ax:lastcar sequence))
+        count it into total-part-1
+      finally (format t "Part 1: ~D~%Part 2: ~D~%" total-part-1 total-part-2))
