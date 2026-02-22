@@ -46,6 +46,9 @@ jupyter-lab-extension, ghcr.io/ocicl/common-lisp-jupyter@sha256:ca0203a0d75b083d
 language-codes, ghcr.io/ocicl/language-codes@sha256:537652bc84b45b52aefdba41028cd0c2b55c470b67df78323dd3f496496b1986, language-codes-20250813-ccf9366/language-codes.asd
 lisp-namespace, ghcr.io/ocicl/lisp-namespace@sha256:ae08006e0b267958c50160658c729c799c6e1c18d94eef83f2ce5cf6ab8bbd20, lisp-namespace-20240503-699fccb/lisp-namespace.asd
 lisp-namespace.test, ghcr.io/ocicl/lisp-namespace@sha256:ae08006e0b267958c50160658c729c799c6e1c18d94eef83f2ce5cf6ab8bbd20, lisp-namespace-20240503-699fccb/lisp-namespace.test.asd
+lparallel, ghcr.io/ocicl/lparallel@sha256:4b9e626031904279f7f2b53b3ca52f380642cb5402390e478fe1f535f0829379, lparallel-20240503-9c11f40/lparallel.asd
+lparallel-bench, ghcr.io/ocicl/lparallel@sha256:4b9e626031904279f7f2b53b3ca52f380642cb5402390e478fe1f535f0829379, lparallel-20240503-9c11f40/lparallel-bench.asd
+lparallel-test, ghcr.io/ocicl/lparallel@sha256:4b9e626031904279f7f2b53b3ca52f380642cb5402390e478fe1f535f0829379, lparallel-20240503-9c11f40/lparallel-test.asd
 micros, ghcr.io/ocicl/micros@sha256:c9e3b2fcfcd3f3d920763dc808f775a0716df45b3c044886812a5e95f97e0d14, micros-20251217-2ec61c8/micros.asd
 multilang-documentation, ghcr.io/ocicl/multilang-documentation@sha256:844bcfe26ad161df6871be0e367e10bf2a5fb5b485196aa5e8c492eaac219ae9, multilang-documentation-20250813-3c2cd0b/multilang-documentation.asd
 multilang-documentation-utils, ghcr.io/ocicl/documentation-utils@sha256:b2a1b3f3bcd1a738af85ae2b0168d408c177661eab6d6bbebb254e394d983f54, documentation-utils-20230511-98630dd/multilang-documentation-utils.asd
