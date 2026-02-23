@@ -30,3 +30,18 @@ To run a day from the commandline (with SBCL):
 ```sh
 sbcl --noinform --quit --eval "(asdf:load-system :aoc-2025-cl)" --load 01.lisp
 ```
+
+## Compilation
+
+This is more for future reference for me, but compiling things could go
+like this (keep in mind that I don't have top-level main functions, which is
+not ideal)
+
+```sh
+$ sbcl --load aoc-2025-cl.asd \
+  --eval "(asdf:load-system :aoc-2025-cl)" \
+  --eval "(declaim (optimize (speed 3) (safety 0)))" \
+  --load 03.lisp \
+  --eval "(sb-ext:save-lisp-and-die #p\"aoctest\" :executable t :toplevel (lambda () (load \"03.lisp\") (sb-ext:exit)))"
+$ ./aoctest
+```
