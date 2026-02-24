@@ -1,7 +1,10 @@
 (in-package :aoc-2025-cl)
 
 (defun parse-line (line)
-  (let ((direction (case (char line 0) (#\L :left) (#\R :right)))
+  (let ((direction (case (char line 0)
+                     (#\L :left)
+                     (#\R :right)
+                     (otherwise (error "Invalid direction"))))
         (amount (parse-integer line :start 1)))
     (cons direction amount)))
 
@@ -24,8 +27,12 @@
                       do (setf dial (turn-dial-one-step dial direction))
                       collect dial)))
 
-(loop for sequence in (run-input)
-      sum (count-if #'zerop sequence) into total-part-2
-      when (zerop (ax:lastcar sequence))
-        count it into total-part-1
-      finally (format t "Part 1: ~D~%Part 2: ~D~%" total-part-1 total-part-2))
+(sr:~>> (run-input)
+        (mapcar #'ax:lastcar)
+        (count-if #'zerop)
+        (format t "Part 1: ~A~%"))
+
+(sr:~>> (run-input)
+        ax:flatten
+        (count-if #'zerop)
+        (format t "Part 2: ~A~%"))
