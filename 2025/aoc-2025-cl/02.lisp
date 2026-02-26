@@ -8,11 +8,11 @@
     (_ (error "Invalid range"))))
 
 (defun parse-input ()
-  (sr:as~> "input/02.txt" <>
-           (uiop:read-file-string <>)
-           (sr:trim-whitespace <>)
-           (uiop:split-string <> :separator ",")
-           (mapcar #'parse-range <>)))
+  (sr:~> "input/02.txt"
+         uiop:read-file-string
+         sr:trim-whitespace
+         (uiop:split-string _ :separator ",")
+         (mapcar #'parse-range _)))
 
 (defun is-repeated-twice (sequence)
   (multiple-value-bind (left right) (sr:halves sequence)
@@ -33,7 +33,7 @@
   (sr:~>> (parse-input)
           (lparallel:pmap
            'list
-           (lambda (range) (sum-invalid-ids range is-invalid-p)))
+           (sr:op (sum-invalid-ids _ is-invalid-p)))
           (reduce #'+)))
 
 (format t "Part 1: ~A~%" (sum-all-invalid-ids #'is-repeated-twice))
