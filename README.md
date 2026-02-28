@@ -8,10 +8,10 @@ languages.
 | [F#](./2025/aoc-2025-fs) | [Lisp](./2025/aoc-2025-cl) |
 | --- | --- |
 |  [Day01.fsx](./2025/aoc-2025-fs/Day01.fsx) |  [01.lisp](./2025/aoc-2025-cl/01.lisp) |
-|  [Day02.fsx](./2025/aoc-2025-fs/Day02.fsx) |  |
-|  [Day03.fsx](./2025/aoc-2025-fs/Day03.fsx) |  |
-|  [Day04.fsx](./2025/aoc-2025-fs/Day04.fsx) |  |
-|  [Day05.fsx](./2025/aoc-2025-fs/Day05.fsx) |  |
+|  [Day02.fsx](./2025/aoc-2025-fs/Day02.fsx) |  [02.lisp](./2025/aoc-2025-cl/02.lisp) |
+|  [Day03.fsx](./2025/aoc-2025-fs/Day03.fsx) |  [03.lisp](./2025/aoc-2025-cl/03.lisp) |
+|  [Day04.fsx](./2025/aoc-2025-fs/Day04.fsx) |  [04.lisp](./2025/aoc-2025-cl/04.lisp) |
+|  [Day05.fsx](./2025/aoc-2025-fs/Day05.fsx) |  [05.lisp](./2025/aoc-2025-cl/05.lisp) |
 |  [Day06.fsx](./2025/aoc-2025-fs/Day06.fsx) |  |
 |  [Day07.fsx](./2025/aoc-2025-fs/Day07.fsx) |  |
 |  [Day08.fsx](./2025/aoc-2025-fs/Day08.fsx) |  |

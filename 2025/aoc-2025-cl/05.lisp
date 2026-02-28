@@ -3,7 +3,7 @@
 (defstruct range (start 0 :type fixnum) (end 0 :type fixnum))
 
 (defmethod contains ((range range) id)
-  (and (>= id (range-start range)) (<= id (range-end range))))
+  (and (<= (range-start range) id (range-end range))))
 
 (defmethod size ((range range))
   (1+ (- (range-end range) (range-start range))))
