@@ -1,9 +1,5 @@
 (in-package :aoc-2025-cl)
 
-(defun words (string)
-  "Like serapeum:words, but considers everything non-space a word"
-  (sr:split-sequence #\Space string :remove-empty-subseqs t))
-
 (defun transpose (sequences)
   (loop for col from 0 below (length (first sequences))
         collect (loop for seq in sequences
@@ -11,7 +7,7 @@
 
 (defun number-parser-part-1 (raw-number-lines)
   (sr:~>> raw-number-lines
-          (mapcar (sr:op (mapcar #'parse-integer (words _))))
+          (mapcar (sr:op (mapcar #'parse-integer (sr:tokens _))))
           transpose))
 
 (defun number-parser-part-2 (raw-number-lines)
@@ -26,7 +22,7 @@
   (let* ((input-lines
            (remove "" (uiop:read-file-lines "input/06.txt") :test #'equal))
          (numbers (funcall number-parser (butlast input-lines)))
-         (operations (mapcar #'intern (words (ax:last-elt input-lines)))))
+         (operations (mapcar #'intern (sr:tokens (ax:last-elt input-lines)))))
     (list :numbers numbers :operations operations)))
 
 (defun solve (input)

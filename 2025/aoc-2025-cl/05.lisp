@@ -3,7 +3,7 @@
 (defstruct range (start 0 :type fixnum) (end 0 :type fixnum))
 
 (defmethod contains ((range range) id)
-  (and (<= (range-start range) id (range-end range))))
+  (<= (range-start range) id (range-end range)))
 
 (defmethod size ((range range))
   (1+ (- (range-end range) (range-start range))))
@@ -27,10 +27,10 @@
     (reduce
      (lambda (merged-ranges range)
        (nconc
-        (merge-consecutive-ranges (car merged-ranges) range)
-        (cdr merged-ranges)))
+        (merge-consecutive-ranges (first merged-ranges) range)
+        (rest merged-ranges)))
      sorted-ranges
-     :initial-value (list (car sorted-ranges)))))
+     :initial-value (list (first sorted-ranges)))))
 
 (defun parse-input ()
   (destructuring-bind

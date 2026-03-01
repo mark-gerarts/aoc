@@ -11,7 +11,7 @@
 (defun parse-input ()
   (sr:~>> "input/01.txt"
           uiop:read-file-lines
-          (remove-if #'ax:emptyp)
+          (remove-if #'sr:blankp)
           (mapcar #'parse-line)))
 
 (defun turn-dial-one-step (dial direction)
