@@ -12,10 +12,10 @@ languages.
 |  [Day03.fsx](./2025/aoc-2025-fs/Day03.fsx) |  [03.lisp](./2025/aoc-2025-cl/03.lisp) |
 |  [Day04.fsx](./2025/aoc-2025-fs/Day04.fsx) |  [04.lisp](./2025/aoc-2025-cl/04.lisp) |
 |  [Day05.fsx](./2025/aoc-2025-fs/Day05.fsx) |  [05.lisp](./2025/aoc-2025-cl/05.lisp) |
-|  [Day06.fsx](./2025/aoc-2025-fs/Day06.fsx) |  |
-|  [Day07.fsx](./2025/aoc-2025-fs/Day07.fsx) |  |
-|  [Day08.fsx](./2025/aoc-2025-fs/Day08.fsx) |  |
-|  [Day09.fsx](./2025/aoc-2025-fs/Day09.fsx) |  |
+|  [Day06.fsx](./2025/aoc-2025-fs/Day06.fsx) |  [06.lisp](./2025/aoc-2025-cl/06.lisp) |
+|  [Day07.fsx](./2025/aoc-2025-fs/Day07.fsx) |  [07.lisp](./2025/aoc-2025-cl/07.lisp) |
+|  [Day08.fsx](./2025/aoc-2025-fs/Day08.fsx) |  [08.lisp](./2025/aoc-2025-cl/08.lisp) |
+|  [Day09.fsx](./2025/aoc-2025-fs/Day09.fsx) |  [09.lisp](./2025/aoc-2025-cl/09.lisp) |
 |  [Day10.fsx](./2025/aoc-2025-fs/Day10.fsx) |  |
 |  [Day11.fsx](./2025/aoc-2025-fs/Day11.fsx) |  |
 |  [Day12.fsx](./2025/aoc-2025-fs/Day12.fsx) |  |
