@@ -14,8 +14,8 @@
 
 (defun parse-input ()
   (sr:~>> "input/08.txt"
-          uiop:read-file-string
-          sr:lines
+          uiop:read-file-lines
+          (remove-if #'uiop:emptyp)
           (mapcar #'parse-pos)))
 
 (defun sort-by-distance (positions)
