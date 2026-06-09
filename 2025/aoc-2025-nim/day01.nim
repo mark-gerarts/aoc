@@ -13,7 +13,7 @@ var
     numZeroesPart1 = 0
     numZeroesPart2 = 0
 
-for line in lines("input/01.txt"):
+for line in "input/01.txt".lines():
     let amount = parseLine(line)
     let step = if amount < 0: -1 else: 1
 

@@ -1,13 +1,14 @@
 import std/strutils
 import std/sequtils
 import std/strformat
+import std/strscans
 
 
 type Validator = proc(number: int): bool
 
 func parseRange(range: string): (int, int) =
-    let parts = range.split('-')
-    (parts[0].parseInt, parts[1].parseInt)
+    let (_, left, right) = range.scanTuple("$i-$i")
+    (left, right)
 
 func isInvalidPart1(number: int): bool =
     let numberAsStr = number.intToStr()
