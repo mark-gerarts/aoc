@@ -1,4 +1,3 @@
-import std/strformat
 import std/strutils
 
 
@@ -23,5 +22,5 @@ for line in "input/01.txt".lines():
 
     if dial == 0: numZeroesPart1 += 1
 
-echo &"Part 1: {numZeroesPart1}"
-echo &"Part 2: {numZeroesPart2}"
+echo "Part 1: ", numZeroesPart1
+echo "Part 2: ", numZeroesPart2

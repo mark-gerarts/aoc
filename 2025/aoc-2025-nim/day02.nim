@@ -1,8 +1,6 @@
 import std/strutils
 import std/sequtils
-import std/strformat
 import std/strscans
-
 
 type Validator = proc(number: int): bool
 
@@ -34,5 +32,5 @@ proc solve(isInvalid: Validator): int =
         for number in left..right:
             if isInvalid(number): result += number
 
-echo &"Part 1: {solve(isInvalidPart1)}"
-echo &"Part 2: {solve(isInvalidPart2)}"
+echo "Part 1: ", solve(isInvalidPart1)
+echo "Part 2: ", solve(isInvalidPart2)

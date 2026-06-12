@@ -34,5 +34,5 @@ proc stepUntilStable(grid: Grid): Grid =
 
 let grid = parseGrid("input/04.txt")
 
-echo "Part 1: " & $(grid.len() - grid.step().len())
-echo "Part 2: " & $(grid.len() - grid.stepUntilStable().len())
+echo "Part 1: ", (grid.len() - grid.step().len())
+echo "Part 2: ", (grid.len() - grid.stepUntilStable().len())
