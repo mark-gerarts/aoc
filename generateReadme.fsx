@@ -11,6 +11,7 @@ type Language =
     | DuckDB
     | Roc
     | Clojure
+    | Prism
 
     member this.display() =
         match this with
@@ -27,6 +28,20 @@ type Language =
         | DuckDB -> "duckdb"
         | Roc -> "roc"
         | Clojure -> "clj"
+        | Prism -> "prism"
+
+    static member parseExtension(extension: string) =
+            match extension with
+            | "fs" | "fsx" -> Some FSharp
+            | "hs" -> Some Haskell
+            | "lisp" -> Some Lisp
+            | "lean" -> Some Lean
+            | "sql" -> Some DuckDB
+            | "nim" -> Some Nim
+            | "roc" -> Some Roc
+            | "clj" -> Some Clojure
+            | "pr"-> Some Prism
+            | _ -> None
 
 type Part =
     | A
@@ -86,23 +101,14 @@ let parsePath (filepath: string) =
 
     let tryParseDay =
         firstMatchingGroup filepath "(\d+)(a|b)?\.[^.]*$"
-        |> Option.map (_.TrimStart('0')) |> Option.bind tryParseInt
+        |> Option.map _.TrimStart('0') |> Option.bind tryParseInt
 
     let tryParseLanguage =
         let parts = filepath.Split '.'
         if Array.length parts = 0 then
             None
         else
-            match parts[Array.length parts - 1] with
-            | "fs" | "fsx" -> Some FSharp
-            | "hs" -> Some Haskell
-            | "lisp" -> Some Lisp
-            | "lean" -> Some Lean
-            | "sql" -> Some DuckDB
-            | "nim" -> Some Nim
-            | "roc" -> Some Roc
-            | "clj" -> Some Clojure
-            | _ -> None
+            Language.parseExtension parts[Array.length parts - 1]
 
 
     let tryParsePart =

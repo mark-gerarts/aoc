@@ -1,0 +1,39 @@
+type Direction = Left | Right
+
+fn parse_line(line) =
+  let first_char = char_at(line, 0) |> chr
+  let amount = substring(line, 1, str_len(line) - 1) |> parse_int
+
+  match (first_char, amount) of
+    ('L', Some(n)) => (Left, n)
+    ('R', Some(n)) => (Right, n)
+    _ => fatal("Invalid input")
+
+fn main() =
+  let instructions =
+    read_file("input/01.txt") |> trim |> split(ord('\n')) |> map(parse_line)
+
+  -- Imperative programming? In _my_ functional language?
+  var dial := 50
+  var numZeroesPart1 := 0
+  var numZeroesPart2 := 0
+
+  for instruction in sof(instructions) do
+    let (direction, amount) = instruction
+
+    repeat(amount) fn
+      match direction of
+        Left => dial := (dial - 1) % 100
+        Right => dial := (dial + 1) % 100
+
+      if dial == 0 then
+        numZeroesPart2 += 1
+
+    if dial == 0 then
+      numZeroesPart1 += 1
+
+  println("Part 1: {numZeroesPart1}")
+  println("Part 2: {numZeroesPart2}")
+
+  -- We explicitly exit to prevent "=> ()" from being printed.
+  exit(0)
