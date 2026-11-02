@@ -49,6 +49,9 @@ ironclad-text, ghcr.io/ocicl/ironclad@sha256:3117e5a26a3e94924074c3548c235a2b733
 iterate, ghcr.io/ocicl/iterate@sha256:6950c55e3782d58cabbbb5753111a70d8cafab8348b7fd6f2143d9abeaab46fb, iterate-20250703-d27d7ff/iterate.asd
 jupyter-lab-extension, ghcr.io/ocicl/common-lisp-jupyter@sha256:ca0203a0d75b083dd21474492c2eceffc882c81ba8200ce8723e2db2b062d0df, common-lisp-jupyter-20250430-2df5529/jupyter-lab-extension.asd
 language-codes, ghcr.io/ocicl/language-codes@sha256:537652bc84b45b52aefdba41028cd0c2b55c470b67df78323dd3f496496b1986, language-codes-20250813-ccf9366/language-codes.asd
+linear-programming, ghcr.io/ocicl/linear-programming@sha256:1815722a191a2f7549e06032f09503f063150c4f04998d18fdcc60e99e8b574a, linear-programming-20260814-7fe5c78/linear-programming.asd
+linear-programming-glpk, git+https://github.com/neil-lindquist/linear-programming-glpk@1854cef644d0066824a8c1c27ae6e1398dbee375, linear-programming-glpk-1854cef/linear-programming-glpk.asd
+linear-programming-test, ghcr.io/ocicl/linear-programming@sha256:1815722a191a2f7549e06032f09503f063150c4f04998d18fdcc60e99e8b574a, linear-programming-20260814-7fe5c78/linear-programming-test.asd
 lisp-namespace, ghcr.io/ocicl/lisp-namespace@sha256:ae08006e0b267958c50160658c729c799c6e1c18d94eef83f2ce5cf6ab8bbd20, lisp-namespace-20240503-699fccb/lisp-namespace.asd
 lisp-namespace.test, ghcr.io/ocicl/lisp-namespace@sha256:ae08006e0b267958c50160658c729c799c6e1c18d94eef83f2ce5cf6ab8bbd20, lisp-namespace-20240503-699fccb/lisp-namespace.test.asd
 lparallel, ghcr.io/ocicl/lparallel@sha256:4b9e626031904279f7f2b53b3ca52f380642cb5402390e478fe1f535f0829379, lparallel-20240503-9c11f40/lparallel.asd

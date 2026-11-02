@@ -3,4 +3,6 @@
   (:local-nicknames
    (:sr :serapeum)
    (:ax :alexandria)
-   (:tr :trivia)))
+   (:tr :trivia)
+   (:lp :linear-programming)
+   (:glpk :linear-programming-glpk)))

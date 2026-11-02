@@ -3,5 +3,6 @@
   :author      "Mark Gerarts"
   :license     "MIT"
   :version     "0.1.0"
-  :depends-on  (:serapeum :alexandria :trivia :lparallel :cl-ppcre :fset)
+  :depends-on  (:serapeum :alexandria :trivia :lparallel :cl-ppcre :fset
+                :linear-programming :linear-programming-glpk)
   :components ((:file "package")))
