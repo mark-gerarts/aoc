@@ -42,7 +42,23 @@
           collect light))
 
 (defun solve-machine (machine)
-  machine)
+  "Basic BFS."
+  (loop with seen-states = (fset:set (getf machine :lights))
+        with frontier = seen-states
+        with goal-state = (getf machine :light-diagram)
+        with wirings = (getf machine :wirings)
+        for search-depth from 1
+        do (fset:do-set (state frontier)
+             (loop for wiring in wirings
+                   for new-state = (apply-wiring wiring state)
+                   when (equal new-state goal-state)
+                     do (return-from solve-machine search-depth)
+                   do (setf frontier (fset:with frontier new-state))))))
 
-(defvar *test-line* "[.##.] (3) (1,3) (2) (2,3) (0,2) (0,1) {3,5,4,7}")
-(solve-machine (parse-line *test-line*))
+(sr:~>> "input/10.txt"
+        uiop:read-file-lines
+        (remove-if #'sr:blankp)
+        (mapcar #'parse-line)
+        (mapcar #'solve-machine)
+        (reduce #'+)
+        (format t "~A~%"))

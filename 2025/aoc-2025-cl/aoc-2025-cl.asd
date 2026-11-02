@@ -3,5 +3,5 @@
   :author      "Mark Gerarts"
   :license     "MIT"
   :version     "0.1.0"
-  :depends-on  (:serapeum :alexandria :trivia :lparallel :cl-ppcre)
+  :depends-on  (:serapeum :alexandria :trivia :lparallel :cl-ppcre :fset)
   :components ((:file "package")))
