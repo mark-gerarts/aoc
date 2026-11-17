@@ -5,20 +5,20 @@ languages.
 
 ## [2025](./2025)
 
-| [F#](./2025/aoc-2025-fs) | [Lisp](./2025/aoc-2025-cl) | [Nim](./2025/aoc-2025-nim) | [Prism](./2025/aoc-2025-prism) |
-| --- | --- | --- | --- |
-|  [Day01.fsx](./2025/aoc-2025-fs/Day01.fsx) |  [01.lisp](./2025/aoc-2025-cl/01.lisp) |  [day01.nim](./2025/aoc-2025-nim/day01.nim) |  [01.pr](./2025/aoc-2025-prism/01.pr) |
-|  [Day02.fsx](./2025/aoc-2025-fs/Day02.fsx) |  [02.lisp](./2025/aoc-2025-cl/02.lisp) |  [day02.nim](./2025/aoc-2025-nim/day02.nim) |  [02.pr](./2025/aoc-2025-prism/02.pr) |
-|  [Day03.fsx](./2025/aoc-2025-fs/Day03.fsx) |  [03.lisp](./2025/aoc-2025-cl/03.lisp) |  [day03.nim](./2025/aoc-2025-nim/day03.nim) |  |
-|  [Day04.fsx](./2025/aoc-2025-fs/Day04.fsx) |  [04.lisp](./2025/aoc-2025-cl/04.lisp) |  [day04.nim](./2025/aoc-2025-nim/day04.nim) |  |
-|  [Day05.fsx](./2025/aoc-2025-fs/Day05.fsx) |  [05.lisp](./2025/aoc-2025-cl/05.lisp) |  [day05.nim](./2025/aoc-2025-nim/day05.nim) |  |
-|  [Day06.fsx](./2025/aoc-2025-fs/Day06.fsx) |  [06.lisp](./2025/aoc-2025-cl/06.lisp) |  [day06.nim](./2025/aoc-2025-nim/day06.nim) |  |
-|  [Day07.fsx](./2025/aoc-2025-fs/Day07.fsx) |  [07.lisp](./2025/aoc-2025-cl/07.lisp) |  [day07.nim](./2025/aoc-2025-nim/day07.nim) |  |
-|  [Day08.fsx](./2025/aoc-2025-fs/Day08.fsx) |  [08.lisp](./2025/aoc-2025-cl/08.lisp) |  [day08.nim](./2025/aoc-2025-nim/day08.nim) |  |
-|  [Day09.fsx](./2025/aoc-2025-fs/Day09.fsx) |  [09.lisp](./2025/aoc-2025-cl/09.lisp) |  |  |
-|  [Day10.fsx](./2025/aoc-2025-fs/Day10.fsx) |  [10.lisp](./2025/aoc-2025-cl/10.lisp) |  |  |
-|  [Day11.fsx](./2025/aoc-2025-fs/Day11.fsx) |  [11.lisp](./2025/aoc-2025-cl/11.lisp) |  |  |
-|  [Day12.fsx](./2025/aoc-2025-fs/Day12.fsx) |  |  |  |
+| [F#](./2025/aoc-2025-fs) | [Lisp](./2025/aoc-2025-cl) | [Nim](./2025/aoc-2025-nim) | [Prism](./2025/aoc-2025-prism) | [Julia](./2025/aoc-2025-jl) |
+| --- | --- | --- | --- | --- |
+|  [Day01.fsx](./2025/aoc-2025-fs/Day01.fsx) |  [01.lisp](./2025/aoc-2025-cl/01.lisp) |  [day01.nim](./2025/aoc-2025-nim/day01.nim) |  [01.pr](./2025/aoc-2025-prism/01.pr) |  [01.jl](./2025/aoc-2025-julia/01.jl) |
+|  [Day02.fsx](./2025/aoc-2025-fs/Day02.fsx) |  [02.lisp](./2025/aoc-2025-cl/02.lisp) |  [day02.nim](./2025/aoc-2025-nim/day02.nim) |  [02.pr](./2025/aoc-2025-prism/02.pr) |  |
+|  [Day03.fsx](./2025/aoc-2025-fs/Day03.fsx) |  [03.lisp](./2025/aoc-2025-cl/03.lisp) |  [day03.nim](./2025/aoc-2025-nim/day03.nim) |  |  |
+|  [Day04.fsx](./2025/aoc-2025-fs/Day04.fsx) |  [04.lisp](./2025/aoc-2025-cl/04.lisp) |  [day04.nim](./2025/aoc-2025-nim/day04.nim) |  |  |
+|  [Day05.fsx](./2025/aoc-2025-fs/Day05.fsx) |  [05.lisp](./2025/aoc-2025-cl/05.lisp) |  [day05.nim](./2025/aoc-2025-nim/day05.nim) |  |  |
+|  [Day06.fsx](./2025/aoc-2025-fs/Day06.fsx) |  [06.lisp](./2025/aoc-2025-cl/06.lisp) |  [day06.nim](./2025/aoc-2025-nim/day06.nim) |  |  |
+|  [Day07.fsx](./2025/aoc-2025-fs/Day07.fsx) |  [07.lisp](./2025/aoc-2025-cl/07.lisp) |  [day07.nim](./2025/aoc-2025-nim/day07.nim) |  |  |
+|  [Day08.fsx](./2025/aoc-2025-fs/Day08.fsx) |  [08.lisp](./2025/aoc-2025-cl/08.lisp) |  [day08.nim](./2025/aoc-2025-nim/day08.nim) |  |  |
+|  [Day09.fsx](./2025/aoc-2025-fs/Day09.fsx) |  [09.lisp](./2025/aoc-2025-cl/09.lisp) |  |  |  |
+|  [Day10.fsx](./2025/aoc-2025-fs/Day10.fsx) |  [10.lisp](./2025/aoc-2025-cl/10.lisp) |  |  |  |
+|  [Day11.fsx](./2025/aoc-2025-fs/Day11.fsx) |  [11.lisp](./2025/aoc-2025-cl/11.lisp) |  |  |  |
+|  [Day12.fsx](./2025/aoc-2025-fs/Day12.fsx) |  |  |  |  |
 
 ## [2024](./2024)
 

@@ -12,6 +12,7 @@ type Language =
     | Roc
     | Clojure
     | Prism
+    | Julia
 
     member this.display() =
         match this with
@@ -29,6 +30,7 @@ type Language =
         | Roc -> "roc"
         | Clojure -> "clj"
         | Prism -> "prism"
+        | Julia -> "jl"
 
     static member parseExtension(extension: string) =
             match extension with
@@ -41,6 +43,7 @@ type Language =
             | "roc" -> Some Roc
             | "clj" -> Some Clojure
             | "pr"-> Some Prism
+            | "jl" -> Some Julia
             | _ -> None
 
 type Part =
