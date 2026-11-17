@@ -31,6 +31,9 @@ To run a day from the commandline (with SBCL):
 sbcl --noinform --quit --eval "(asdf:load-system :aoc-2025-cl)" --load 01.lisp
 ```
 
+Note that I solved day 10 with an LP solver (GLPK), so that needs to be on
+your path when loading the system. Run `nix-shell` to configure it automatically.
+
 ## Compilation
 
 This is more for future reference for me, but compiling things could go
