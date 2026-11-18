@@ -30,7 +30,7 @@ type Language =
         | Roc -> "roc"
         | Clojure -> "clj"
         | Prism -> "prism"
-        | Julia -> "jl"
+        | Julia -> "julia"
 
     static member parseExtension(extension: string) =
             match extension with

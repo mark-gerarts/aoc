@@ -1,0 +1,44 @@
+import Sequence as Seq
+
+fn parse_range(range: String) : (Int, Int) =
+  match split(ord('-'), range) |> map(parse_int) of
+    [Some(l), Some(r)] => (l, r)
+    _ => fatal("Invalid input range: {range}")
+
+fn all_equal(xs : List(a)) : Bool given Eq(a) =
+  match xs of
+    Nil => true
+    Cons(x, tail) =>
+      for other in sof(tail) do
+        if not (other == x) then
+          return false
+
+      true
+
+fn splits(id: Int) = \(_u) ->
+  let id = show(id) in
+
+  for num_chunks in srange(2, str_len(id) + 1) do
+    let chunk_size = str_len(id) / num_chunks
+    let chunks = chars(id) |> List.chunks_of(chunk_size)
+
+    emit(all_equal(chunks))
+
+fn is_repeated_once(id : Int) : Bool =
+  match splits(id) |> scollect |> List.head of
+    Some(true) => true
+    _ => false
+
+
+fn main() =
+  let ranges = read_file("input/02.test")
+    |> trim
+    |> split(ord(','))
+    |> map(parse_range)
+    |> Seq.from_list
+
+  let ranges = Seq.flat_map(ranges, \(start, end) -> Seq.range(start, end))
+
+  let part1 = ranges |> List.filter(is_repeated_once) |> sum
+
+  exit(0)

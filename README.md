@@ -5,10 +5,10 @@ languages.
 
 ## [2025](./2025)
 
-| [F#](./2025/aoc-2025-fs) | [Lisp](./2025/aoc-2025-cl) | [Nim](./2025/aoc-2025-nim) | [Prism](./2025/aoc-2025-prism) | [Julia](./2025/aoc-2025-jl) |
+| [F#](./2025/aoc-2025-fs) | [Lisp](./2025/aoc-2025-cl) | [Nim](./2025/aoc-2025-nim) | [Prism](./2025/aoc-2025-prism) | [Julia](./2025/aoc-2025-julia) |
 | --- | --- | --- | --- | --- |
 |  [Day01.fsx](./2025/aoc-2025-fs/Day01.fsx) |  [01.lisp](./2025/aoc-2025-cl/01.lisp) |  [day01.nim](./2025/aoc-2025-nim/day01.nim) |  [01.pr](./2025/aoc-2025-prism/01.pr) |  [01.jl](./2025/aoc-2025-julia/01.jl) |
-|  [Day02.fsx](./2025/aoc-2025-fs/Day02.fsx) |  [02.lisp](./2025/aoc-2025-cl/02.lisp) |  [day02.nim](./2025/aoc-2025-nim/day02.nim) |  [02.pr](./2025/aoc-2025-prism/02.pr) |  |
+|  [Day02.fsx](./2025/aoc-2025-fs/Day02.fsx) |  [02.lisp](./2025/aoc-2025-cl/02.lisp) |  [day02.nim](./2025/aoc-2025-nim/day02.nim) |  [02.pr](./2025/aoc-2025-prism/02.pr) |  [02.jl](./2025/aoc-2025-julia/02.jl) |
 |  [Day03.fsx](./2025/aoc-2025-fs/Day03.fsx) |  [03.lisp](./2025/aoc-2025-cl/03.lisp) |  [day03.nim](./2025/aoc-2025-nim/day03.nim) |  |  |
 |  [Day04.fsx](./2025/aoc-2025-fs/Day04.fsx) |  [04.lisp](./2025/aoc-2025-cl/04.lisp) |  [day04.nim](./2025/aoc-2025-nim/day04.nim) |  |  |
 |  [Day05.fsx](./2025/aoc-2025-fs/Day05.fsx) |  [05.lisp](./2025/aoc-2025-cl/05.lisp) |  [day05.nim](./2025/aoc-2025-nim/day05.nim) |  |  |
